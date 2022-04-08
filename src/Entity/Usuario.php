@@ -4,10 +4,12 @@ namespace App\Entity;
 
 use App\Repository\UsuarioRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UsuarioRepository::class)]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -26,9 +28,9 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'integer')]
     private $office;
- 
+
     #[ORM\Column(type: 'string', length: 100)]
-    private $nome;
+    private $username;
 
     public function getId(): ?int
     {
@@ -112,15 +114,16 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getNome(): ?string
+    public function getUsername(): ?string
     {
-        return $this->nome;
+        return $this->username;
     }
 
-    public function setNome(string $nome): self
+    public function setUsername(string $username): self
     {
-        $this->nome = $nome;
+        $this->username = $username;
 
         return $this;
     }
+
 }
