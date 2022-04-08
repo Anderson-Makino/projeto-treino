@@ -19,7 +19,7 @@ class Funcionario
     #[ORM\Column(type: 'string', length: 200)]
     private $email;
 
-    #[ORM\Column(type: 'decimal', precision: 11, scale: 11, nullable: true)]
+    #[ORM\Column(type: 'decimal', precision: 11, scale: 0, nullable: true)]
     private $phone;
 
     #[ORM\Column(type: 'decimal', precision: 7, scale: 2, nullable: true)]

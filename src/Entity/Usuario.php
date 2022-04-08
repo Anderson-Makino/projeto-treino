@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UsuarioRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -26,11 +28,17 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string')]
     private $password;
 
-    #[ORM\Column(type: 'integer')]
-    private $office;
-
     #[ORM\Column(type: 'string', length: 100)]
     private $username;
+
+    #[ORM\ManyToMany(targetEntity: Escritorio::class, inversedBy: 'user_office')]
+    private $office;
+
+    public function __construct()
+    {
+        $this->office = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -102,18 +110,6 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getOffice(): ?int
-    {
-        return $this->office;
-    }
-
-    public function setOffice(int $office): self
-    {
-        $this->office = $office;
-
-        return $this;
-    }
-
     public function getUsername(): ?string
     {
         return $this->username;
@@ -122,6 +118,30 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUsername(string $username): self
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Escritorio>
+     */
+    public function getOffice(): Collection
+    {
+        return $this->office;
+    }
+
+    public function addOffice(Escritorio $office): self
+    {
+        if (!$this->office->contains($office)) {
+            $this->office[] = $office;
+        }
+
+        return $this;
+    }
+
+    public function removeOffice(Escritorio $office): self
+    {
+        $this->office->removeElement($office);
 
         return $this;
     }

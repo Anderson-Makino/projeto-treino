@@ -19,7 +19,7 @@ class Empresa
     #[ORM\Column(type: 'string', length: 250)]
     private $endereco;
 
-    #[ORM\Column(type: 'decimal', precision: 11, scale: 11, nullable: true)]
+    #[ORM\Column(type: 'decimal', precision: 11, scale: 0, nullable: true)]
     private $phone;
 
     #[ORM\Column(type: 'text', nullable: true)]

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EscritorioRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EscritorioRepository::class)]
@@ -24,6 +26,14 @@ class Escritorio
 
     #[ORM\Column(type: 'text', nullable: true)]
     private $descricao;
+
+    #[ORM\ManyToMany(targetEntity: Usuario::class, mappedBy: 'office')]
+    private $user_office;
+
+    public function __construct()
+    {
+        $this->user_office = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -74,6 +84,33 @@ class Escritorio
     public function setDescricao(?string $descricao): self
     {
         $this->descricao = $descricao;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Usuario>
+     */
+    public function getUserOffice(): Collection
+    {
+        return $this->user_office;
+    }
+
+    public function addUserOffice(Usuario $userOffice): self
+    {
+        if (!$this->user_office->contains($userOffice)) {
+            $this->user_office[] = $userOffice;
+            $userOffice->addOffice($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserOffice(Usuario $userOffice): self
+    {
+        if ($this->user_office->removeElement($userOffice)) {
+            $userOffice->removeOffice($this);
+        }
 
         return $this;
     }

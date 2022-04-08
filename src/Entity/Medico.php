@@ -19,7 +19,7 @@ class Medico
     #[ORM\Column(type: 'string', length: 15)]
     private $crm;
 
-    #[ORM\Column(type: 'decimal', precision: 11, scale: 11, nullable: true)]
+    #[ORM\Column(type: 'decimal', precision: 11, scale: 0, nullable: true)]
     private $phone;
 
     #[ORM\Column(type: 'integer')]
