@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Escritorio{% endblock %}
+
+{% block body %}
+    <h1>Edit Escritorio</h1>
+
+    {{ include('escritorio/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_escritorio_index') }}">back to list</a>
+
+    {{ include('escritorio/_delete_form.html.twig') }}
+{% endblock %}
