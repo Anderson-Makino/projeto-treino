@@ -30,6 +30,10 @@ class Escritorio
     #[ORM\ManyToMany(targetEntity: Usuario::class, mappedBy: 'office')]
     private $user_office;
 
+    #[ORM\ManyToOne(targetEntity: Empresa::class, inversedBy: 'company_office')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $office_company;
+
     public function __construct()
     {
         $this->user_office = new ArrayCollection();
@@ -111,6 +115,18 @@ class Escritorio
         if ($this->user_office->removeElement($userOffice)) {
             $userOffice->removeOffice($this);
         }
+
+        return $this;
+    }
+
+    public function getOfficeCompany(): ?Empresa
+    {
+        return $this->office_company;
+    }
+
+    public function setOfficeCompany(?Empresa $office_company): self
+    {
+        $this->office_company = $office_company;
 
         return $this;
     }

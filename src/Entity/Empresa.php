@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EmpresaRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EmpresaRepository::class)]
@@ -27,6 +29,14 @@ class Empresa
 
     #[ORM\Column(type: 'integer')]
     private $office;
+
+    #[ORM\OneToMany(mappedBy: 'office_company', targetEntity: Escritorio::class)]
+    private $company_office;
+
+    public function __construct()
+    {
+        $this->company_office = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -89,6 +99,36 @@ class Empresa
     public function setOffice(int $office): self
     {
         $this->office = $office;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Escritorio>
+     */
+    public function getCompanyOffice(): Collection
+    {
+        return $this->company_office;
+    }
+
+    public function addCompanyOffice(Escritorio $companyOffice): self
+    {
+        if (!$this->company_office->contains($companyOffice)) {
+            $this->company_office[] = $companyOffice;
+            $companyOffice->setOfficeCompany($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompanyOffice(Escritorio $companyOffice): self
+    {
+        if ($this->company_office->removeElement($companyOffice)) {
+            // set the owning side to null (unless already changed)
+            if ($companyOffice->getOfficeCompany() === $this) {
+                $companyOffice->setOfficeCompany(null);
+            }
+        }
 
         return $this;
     }
