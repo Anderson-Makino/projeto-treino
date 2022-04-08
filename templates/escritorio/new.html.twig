@@ -3,6 +3,8 @@
 {% block title %}New Escritorio{% endblock %}
 
 {% block body %}
+
+    {{ block ("navbar", "navbar.html.twig") }}
     <h1>Create new Escritorio</h1>
 
     {{ include('escritorio/_form.html.twig') }}

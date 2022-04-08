@@ -3,6 +3,8 @@
 {% block title %}New Medico{% endblock %}
 
 {% block body %}
+
+    {{ block ("navbar", "navbar.html.twig") }}
     <h1>Create new Medico</h1>
 
     {{ include('medico/_form.html.twig') }}

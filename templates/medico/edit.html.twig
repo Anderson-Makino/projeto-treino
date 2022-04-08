@@ -3,6 +3,8 @@
 {% block title %}Edit Medico{% endblock %}
 
 {% block body %}
+
+    {{ block ("navbar", "navbar.html.twig") }}
     <h1>Edit Medico</h1>
 
     {{ include('medico/_form.html.twig', {'button_label': 'Update'}) }}

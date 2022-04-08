@@ -3,6 +3,8 @@
 {% block title %}Edit Funcionario{% endblock %}
 
 {% block body %}
+
+    {{ block ("navbar", "navbar.html.twig") }}
     <h1>Edit Funcionario</h1>
 
     {{ include('funcionario/_form.html.twig', {'button_label': 'Update'}) }}

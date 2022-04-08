@@ -13,7 +13,7 @@ class UsuarioType extends AbstractType
     {
         $builder
 
-            ->add('nome')
+            ->add('username')
             ->add('email')
             ->add('password')
             ->add('office')
