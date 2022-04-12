@@ -27,7 +27,7 @@ class Empresa
     #[ORM\Column(type: 'text', nullable: true)]
     private $descricao;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'integer', nullable: true)]
     private $office;
 
     #[ORM\OneToMany(mappedBy: 'office_company', targetEntity: Escritorio::class)]

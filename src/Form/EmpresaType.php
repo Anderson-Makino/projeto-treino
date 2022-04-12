@@ -16,7 +16,6 @@ class EmpresaType extends AbstractType
             ->add('endereco')
             ->add('phone')
             ->add('descricao')
-            ->add('office')
         ;
     }
 

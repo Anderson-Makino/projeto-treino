@@ -15,7 +15,6 @@
                 <th>Endereco</th>
                 <th>Phone</th>
                 <th>Descricao</th>
-                <th>Office</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -27,7 +26,6 @@
                 <td>{{ empresa.endereco }}</td>
                 <td>{{ empresa.phone }}</td>
                 <td>{{ empresa.descricao }}</td>
-                <td>{{ empresa.office }}</td>
                 <td>
                     <a href="{{ path('app_empresa_show', {'id': empresa.id}) }}">show</a>
                     <a href="{{ path('app_empresa_edit', {'id': empresa.id}) }}">edit</a>
