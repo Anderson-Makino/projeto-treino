@@ -15,7 +15,6 @@
                 <th>Email</th>
                 <th>Roles</th>
                 <th>Password</th>
-                <th>Office</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -26,9 +25,6 @@
                 <td>{{ usuario.email }}</td>
                 <td>{{ usuario.roles ? usuario.roles|json_encode : '' }}</td>
                 <td>{{ usuario.password }}</td>
-                <td>
-                    {{usuario.office|join('/') }}
-                </td>
                 <td>
                     <a href="{{ path('app_usuario_show', {'id': usuario.id}) }}">show</a>
                     <a href="{{ path('app_usuario_edit', {'id': usuario.id}) }}">edit</a>
@@ -42,5 +38,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_usuario_new') }}">Create new</a>
+    <a href="{{ path('app_register') }}">Create new</a>
 {% endblock %}

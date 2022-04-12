@@ -25,6 +25,9 @@ class Medico
     #[ORM\Column(type: 'integer')]
     private $company;
 
+    #[ORM\ManyToOne(targetEntity: Empresa::class, inversedBy: 'medico_id')]
+    private $company_id;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,18 @@ class Medico
     public function setCompany(int $company): self
     {
         $this->company = $company;
+
+        return $this;
+    }
+
+    public function getCompanyId(): ?Empresa
+    {
+        return $this->company_id;
+    }
+
+    public function setCompanyId(?Empresa $company_id): self
+    {
+        $this->company_id = $company_id;
 
         return $this;
     }

@@ -33,9 +33,17 @@ class Empresa
     #[ORM\OneToMany(mappedBy: 'office_company', targetEntity: Escritorio::class)]
     private $company_office;
 
+    #[ORM\OneToMany(mappedBy: 'company_id', targetEntity: Medico::class)]
+    private $medico_id;
+
+    #[ORM\OneToMany(mappedBy: 'company_id', targetEntity: Funcionario::class)]
+    private $funcionario_id;
+
     public function __construct()
     {
         $this->company_office = new ArrayCollection();
+        $this->medico_id = new ArrayCollection();
+        $this->funcionario_id = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -127,6 +135,66 @@ class Empresa
             // set the owning side to null (unless already changed)
             if ($companyOffice->getOfficeCompany() === $this) {
                 $companyOffice->setOfficeCompany(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Medico>
+     */
+    public function getMedicoId(): Collection
+    {
+        return $this->medico_id;
+    }
+
+    public function addMedicoId(Medico $medicoId): self
+    {
+        if (!$this->medico_id->contains($medicoId)) {
+            $this->medico_id[] = $medicoId;
+            $medicoId->setCompanyId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMedicoId(Medico $medicoId): self
+    {
+        if ($this->medico_id->removeElement($medicoId)) {
+            // set the owning side to null (unless already changed)
+            if ($medicoId->getCompanyId() === $this) {
+                $medicoId->setCompanyId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Funcionario>
+     */
+    public function getFuncionarioId(): Collection
+    {
+        return $this->funcionario_id;
+    }
+
+    public function addFuncionarioId(Funcionario $funcionarioId): self
+    {
+        if (!$this->funcionario_id->contains($funcionarioId)) {
+            $this->funcionario_id[] = $funcionarioId;
+            $funcionarioId->setCompanyId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFuncionarioId(Funcionario $funcionarioId): self
+    {
+        if ($this->funcionario_id->removeElement($funcionarioId)) {
+            // set the owning side to null (unless already changed)
+            if ($funcionarioId->getCompanyId() === $this) {
+                $funcionarioId->setCompanyId(null);
             }
         }
 
