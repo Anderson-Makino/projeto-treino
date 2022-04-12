@@ -16,7 +16,7 @@ class FuncionarioType extends AbstractType
             ->add('email')
             ->add('phone')
             ->add('salario')
-            ->add('company')
+            ->add('company_id')
         ;
     }
 

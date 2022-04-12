@@ -15,7 +15,7 @@ class MedicoType extends AbstractType
             ->add('nome')
             ->add('crm')
             ->add('phone')
-            ->add('company')
+            ->add('company_id')
         ;
     }
 
