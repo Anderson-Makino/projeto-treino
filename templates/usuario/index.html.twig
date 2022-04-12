@@ -12,9 +12,10 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Username</th>
                 <th>Email</th>
                 <th>Roles</th>
-                <th>Password</th>
+                {#<th>Password</th>#}
                 <th>actions</th>
             </tr>
         </thead>
@@ -22,9 +23,10 @@
         {% for usuario in usuarios %}
             <tr>
                 <td>{{ usuario.id }}</td>
+                <td>{{ usuario.Username }}</td>
                 <td>{{ usuario.email }}</td>
                 <td>{{ usuario.roles ? usuario.roles|json_encode : '' }}</td>
-                <td>{{ usuario.password }}</td>
+                {#<td>{{ usuario.password }}</td>#}
                 <td>
                     <a href="{{ path('app_usuario_show', {'id': usuario.id}) }}">show</a>
                     <a href="{{ path('app_usuario_edit', {'id': usuario.id}) }}">edit</a>

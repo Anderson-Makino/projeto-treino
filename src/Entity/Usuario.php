@@ -34,6 +34,8 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Escritorio::class, inversedBy: 'user_office')]
     private $office;
 
+    private $name = '';
+
     public function __construct()
     {
         $this->office = new ArrayCollection();
@@ -145,5 +147,11 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
 
 }

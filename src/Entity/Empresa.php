@@ -39,6 +39,8 @@ class Empresa
     #[ORM\OneToMany(mappedBy: 'company_id', targetEntity: Funcionario::class)]
     private $funcionario_id;
 
+    private $name = '';
+
     public function __construct()
     {
         $this->company_office = new ArrayCollection();
@@ -199,5 +201,10 @@ class Empresa
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

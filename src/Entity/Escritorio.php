@@ -34,6 +34,8 @@ class Escritorio
     #[ORM\JoinColumn(nullable: false)]
     private $office_company;
 
+    private $name = '';
+
     public function __construct()
     {
         $this->user_office = new ArrayCollection();
@@ -129,5 +131,10 @@ class Escritorio
         $this->office_company = $office_company;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

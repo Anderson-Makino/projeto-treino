@@ -16,7 +16,6 @@ class UsuarioType extends AbstractType
             ->add('username')
             ->add('email')
             ->add('password')
-            #->add('office')
         ;
     }
 
