@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Empresa;
 use App\Entity\Funcionario;
 use App\Form\FuncionarioType;
 use App\Repository\FuncionarioRepository;
@@ -40,10 +41,12 @@ class FuncionarioController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_funcionario_show', methods: ['GET'])]
-    public function show(Funcionario $funcionario): Response
+    public function show(Funcionario $funcionario, Empresa $empresa): Response
     {
+        $empresa = $funcionario->getCompanyId();
         return $this->render('funcionario/show.html.twig', [
             'funcionario' => $funcionario,
+            'empresa' => $empresa,
         ]);
     }
 

@@ -44,8 +44,10 @@ class MedicoController extends AbstractController
     #[Route('/{id}', name: 'app_medico_show', methods: ['GET'])]
     public function show(Medico $medico): Response
     {
+        $empresa = $medico->getCompanyId();
         return $this->render('medico/show.html.twig', [
             'medico' => $medico,
+            'empresa' => $empresa,
         ]);
     }
 

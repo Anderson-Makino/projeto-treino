@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Empresa;
 use App\Entity\Escritorio;
 use App\Form\EscritorioType;
 use App\Repository\EscritorioRepository;
@@ -40,10 +41,12 @@ class EscritorioController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_escritorio_show', methods: ['GET'])]
-    public function show(Escritorio $escritorio): Response
+    public function show(Escritorio $escritorio, Empresa $empresa): Response
     {
+        $empresa = $escritorio->getOfficeCompany();
         return $this->render('escritorio/show.html.twig', [
             'escritorio' => $escritorio,
+            'empresa' => $empresa
         ]);
     }
 
