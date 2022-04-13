@@ -15,7 +15,6 @@
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Salario</th>
-                <th>Company</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -27,7 +26,6 @@
                 <td>{{ funcionario.email }}</td>
                 <td>{{ funcionario.phone }}</td>
                 <td>{{ funcionario.salario }}</td>
-                <td>{{ funcionario.company }}</td>
                 <td>
                     <a href="{{ path('app_funcionario_show', {'id': funcionario.id}) }}">show</a>
                     <a href="{{ path('app_funcionario_edit', {'id': funcionario.id}) }}">edit</a>

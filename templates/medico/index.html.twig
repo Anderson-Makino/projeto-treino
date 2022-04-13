@@ -14,7 +14,6 @@
                 <th>Nome</th>
                 <th>Crm</th>
                 <th>Phone</th>
-                <th>Company</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -25,7 +24,6 @@
                 <td>{{ medico.nome }}</td>
                 <td>{{ medico.crm }}</td>
                 <td>{{ medico.phone }}</td>
-                <td>{{ medico.company }}</td>
                 <td>
                     <a href="{{ path('app_medico_show', {'id': medico.id}) }}">show</a>
                     <a href="{{ path('app_medico_edit', {'id': medico.id}) }}">edit</a>

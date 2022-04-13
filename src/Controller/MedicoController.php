@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Medico;
 use App\Form\MedicoType;
+use App\Repository\EmpresaRepository;
 use App\Repository\MedicoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,10 +15,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class MedicoController extends AbstractController
 {
     #[Route('/', name: 'app_medico_index', methods: ['GET'])]
-    public function index(MedicoRepository $medicoRepository): Response
+    public function index(MedicoRepository $medicoRepository, EmpresaRepository $empresaRepository): Response
     {
         return $this->render('medico/index.html.twig', [
             'medicos' => $medicoRepository->findAll(),
+            'empresa' => $empresaRepository->findAll(),
         ]);
     }
 

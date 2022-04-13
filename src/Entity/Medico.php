@@ -22,11 +22,13 @@ class Medico
     #[ORM\Column(type: 'decimal', precision: 11, scale: 0, nullable: true)]
     private $phone;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'integer', nullable: true)]
     private $company;
 
     #[ORM\ManyToOne(targetEntity: Empresa::class, inversedBy: 'medico_id')]
     private $company_id;
+
+    private $name = '';
 
     public function getId(): ?int
     {
@@ -91,5 +93,10 @@ class Medico
         $this->company_id = $company_id;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

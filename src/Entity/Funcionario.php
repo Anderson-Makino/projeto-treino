@@ -25,7 +25,7 @@ class Funcionario
     #[ORM\Column(type: 'decimal', precision: 7, scale: 2, nullable: true)]
     private $salario;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'integer', nullable: true)]
     private $company;
 
     #[ORM\ManyToOne(targetEntity: Empresa::class, inversedBy: 'funcionario_id')]
