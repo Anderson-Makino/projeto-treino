@@ -25,10 +25,12 @@
                 <th>Password</th>
                 <td>{{ usuario.password }}</td>
             </tr>
+            {% if office %}
             <tr>
                 <th>Office</th>
                 <td>{{ office.id }}</td>
             </tr>
+            {% endif %}
         </tbody>
     </table>
 
