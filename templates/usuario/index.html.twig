@@ -25,7 +25,12 @@
                 <td>{{ usuario.id }}</td>
                 <td>{{ usuario.Username }}</td>
                 <td>{{ usuario.email }}</td>
-                <td>{{ usuario.roles ? usuario.roles|json_encode : '' }}</td>
+                {% if "ROLE_ADMIN" in usuario.roles %}
+                <td>Administrador</td>
+                {% else %}
+                <td>Usuario comum</td>
+                {% endif %}
+
                 {#<td>{{ usuario.password }}</td>#}
                 <td>
                     <a class="btnsmall" href="{{ path('app_usuario_show', {'id': usuario.id}) }}">Mostrar</a>

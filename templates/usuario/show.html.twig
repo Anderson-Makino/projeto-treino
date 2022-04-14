@@ -19,7 +19,11 @@
             </tr>
             <tr>
                 <th>Roles</th>
-                <td>{{ usuario.roles ? usuario.roles|json_encode : '' }}</td>
+                {% if "ROLE_ADMIN" in usuario.roles %}
+                <td>Administrador</td>
+                {% else %}
+                <td>Usuario comum</td>
+                {% endif %}
             </tr>
             <tr>
                 <th>Password</th>
