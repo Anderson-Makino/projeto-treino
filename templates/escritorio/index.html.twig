@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Escritorio index{% endblock %}
+{% block title %}Escritorio{% endblock %}
 
 {% block body %}
 
     {{ block ("navbar", "navbar.html.twig") }}
-    <h1>Escritorio index</h1>
+    <h1>Escritorio</h1>
 
     <table class="table">
         <thead>
@@ -27,8 +27,8 @@
                 <td>{{ escritorio.phone }}</td>
                 <td>{{ escritorio.descricao }}</td>
                 <td>
-                    <a href="{{ path('app_escritorio_show', {'id': escritorio.id}) }}">show</a>
-                    <a href="{{ path('app_escritorio_edit', {'id': escritorio.id}) }}">edit</a>
+                    <a class="btnsmall" href="{{ path('app_escritorio_show', {'id': escritorio.id}) }}">Mostrar</a>
+                    <a class="btnsmall" href="{{ path('app_escritorio_edit', {'id': escritorio.id}) }}">Editar</a>
                 </td>
             </tr>
         {% else %}
@@ -39,5 +39,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_escritorio_new') }}">Create new</a>
+    <a class ="redirect_link btn" href="{{ path('app_escritorio_new') }}">Criar Novo</a>
 {% endblock %}

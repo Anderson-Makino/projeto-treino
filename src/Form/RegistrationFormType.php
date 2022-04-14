@@ -51,6 +51,8 @@ class RegistrationFormType extends AbstractType
 
             ->add('username')
 
+            ->add('office')
+
 
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,

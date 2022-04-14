@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Empresa index{% endblock %}
+{% block title %}Empresa{% endblock %}
 
 {% block body %}
 
     {{ block ("navbar", "navbar.html.twig") }}
-    <h1>Empresa index</h1>
+    <h1>Empresa</h1>
 
     <table class="table">
         <thead>
@@ -27,8 +27,8 @@
                 <td>{{ empresa.phone }}</td>
                 <td>{{ empresa.descricao }}</td>
                 <td>
-                    <a href="{{ path('app_empresa_show', {'id': empresa.id}) }}">show</a>
-                    <a href="{{ path('app_empresa_edit', {'id': empresa.id}) }}">edit</a>
+                    <a class="btnsmall" href="{{ path('app_empresa_show', {'id': empresa.id}) }}">Mostrar</a>
+                    <a class="btnsmall" href="{{ path('app_empresa_edit', {'id': empresa.id}) }}">Editar</a>
                 </td>
             </tr>
         {% else %}
@@ -39,5 +39,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_empresa_new') }}">Create new</a>
+    <a class ="redirect_link btn" href="{{ path('app_empresa_new') }}">Criar Novo</a>
 {% endblock %}

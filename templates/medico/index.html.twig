@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Medico index{% endblock %}
+{% block title %}Medico{% endblock %}
 
 {% block body %}
 
     {{ block ("navbar", "navbar.html.twig") }}
-    <h1>Medico index</h1>
+    <h1>Medico</h1>
 
     <table class="table">
         <thead>
@@ -25,8 +25,8 @@
                 <td>{{ medico.crm }}</td>
                 <td>{{ medico.phone }}</td>
                 <td>
-                    <a href="{{ path('app_medico_show', {'id': medico.id}) }}">show</a>
-                    <a href="{{ path('app_medico_edit', {'id': medico.id}) }}">edit</a>
+                    <a class="btnsmall" href="{{ path('app_medico_show', {'id': medico.id}) }}">Mostrar</a>
+                    <a class="btnsmall" href="{{ path('app_medico_edit', {'id': medico.id}) }}">Editar</a>
                 </td>
             </tr>
         {% else %}
@@ -37,5 +37,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_medico_new') }}">Create new</a>
+    <a class ="redirect_link btn" href="{{ path('app_medico_new') }}">Criar Novo</a>
 {% endblock %}

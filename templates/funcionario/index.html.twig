@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Funcionario index{% endblock %}
+{% block title %}Funcionario{% endblock %}
 
 {% block body %}
 
     {{ block ("navbar", "navbar.html.twig") }}
-    <h1>Funcionario index</h1>
+    <h1>Funcionario</h1>
 
     <table class="table">
         <thead>
@@ -27,8 +27,8 @@
                 <td>{{ funcionario.phone }}</td>
                 <td>{{ funcionario.salario }}</td>
                 <td>
-                    <a href="{{ path('app_funcionario_show', {'id': funcionario.id}) }}">show</a>
-                    <a href="{{ path('app_funcionario_edit', {'id': funcionario.id}) }}">edit</a>
+                    <a class="btnsmall" href="{{ path('app_funcionario_show', {'id': funcionario.id}) }}">Mostrar</a>
+                    <a class="btnsmall" href="{{ path('app_funcionario_edit', {'id': funcionario.id}) }}">Editar</a>
                 </td>
             </tr>
         {% else %}
@@ -39,5 +39,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_funcionario_new') }}">Create new</a>
+    <a class ="redirect_link btn" href="{{ path('app_funcionario_new') }}">Criar Novo</a>
 {% endblock %}
