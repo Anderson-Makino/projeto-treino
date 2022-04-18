@@ -31,7 +31,7 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 100)]
     private $username;
 
-    #[ORM\ManyToMany(targetEntity: Escritorio::class, inversedBy: 'user_office')]
+    #[ORM\ManyToMany(targetEntity: Escritorio::class, inversedBy: 'user_office', orphanRemoval: true)]
     private $office;
 
     private $name = '';
@@ -148,7 +148,7 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->name;
     }

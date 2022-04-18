@@ -27,7 +27,7 @@ class Escritorio
     #[ORM\Column(type: 'text', nullable: true)]
     private $descricao;
 
-    #[ORM\ManyToMany(targetEntity: Usuario::class, mappedBy: 'office')]
+    #[ORM\ManyToMany(targetEntity: Usuario::class, mappedBy: 'office', orphanRemoval: true)]
     private $user_office;
 
     #[ORM\ManyToOne(targetEntity: Empresa::class, inversedBy: 'company_office')]
@@ -133,7 +133,7 @@ class Escritorio
         return $this;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->name;
     }
