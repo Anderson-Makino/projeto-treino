@@ -51,11 +51,11 @@ class RegistrationFormType extends AbstractType
 
             ->add('username')
 
-            ->add('office', null, [
+            /*->add('office', null, [
                 'choice_label' => function($company) {
                 return $company->getNome();
                 }
-            ])
+            ])*/
 
         ;
         $builder->addEventListener(FormEvents::POST_SET_DATA, [$this, 'onPostSetData']);
@@ -72,8 +72,6 @@ class RegistrationFormType extends AbstractType
     {
         $form = $formEvent->getForm();
         $user = $this->security->getUser();
-        $userlogged = $formEvent->getData(); 
-
-        #$userlogged->setOffice($user->getOffice());
+        $userlogged = $formEvent->getData();
     }
 }

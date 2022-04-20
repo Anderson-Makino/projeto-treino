@@ -6,16 +6,14 @@ use App\Entity\Escritorio;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Bridge\Doctrine\Form\Type\IntegerType;
 
 class EscritorioType extends AbstractType
 {
 
-    public $route;
+    private $route;
 
     public function __construct(RequestStack $requestStack) {
 

@@ -21,6 +21,7 @@
                 <th>Endereco</th>
                 <th>Phone</th>
                 <th>Descricao</th>
+                <th>CNPJ</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -32,6 +33,7 @@
                 <td>{{ escritorio.endereco }}</td>
                 <td>{{ escritorio.phone }}</td>
                 <td>{{ escritorio.descricao }}</td>
+                <td>{{ escritorio.cnpj }} </td>
                 <td>
                     <a class="btnsmall" href="{{ path('app_escritorio_show', {'id': escritorio.id}) }}">Mostrar</a>
                     <a class="btnsmall" href="{{ path('app_escritorio_edit', {'id': escritorio.id}) }}">Editar</a>

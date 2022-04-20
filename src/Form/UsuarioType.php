@@ -6,6 +6,7 @@ use App\Entity\Usuario;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -15,10 +16,12 @@ class UsuarioType extends AbstractType
 {
 
     private $security;
+    private $route;
 
-    public function __construct(Security $security)
+    public function __construct(Security $security, RequestStack $requestStack)
     {
        $this->security = $security;
+       $this->route = $requestStack->getCurrentRequest()->get('_route');
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -28,11 +31,6 @@ class UsuarioType extends AbstractType
             ->add('username')
             ->add('email')
             ->add('password')
-            ->add('office',null,[
-                'choice_label'=>function($company) {
-                    return $company->getNome();
-                }
-            ])
         ;
         $builder->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'onPreSetData']);
     }
@@ -49,13 +47,23 @@ class UsuarioType extends AbstractType
         $form = $formEvent->getForm();
         $user = $this->security->getUser();
 
-        if (in_array("ROLE_ADMIN", $user->getRoles())) {
+        if (in_array("ROLE_ADMIN", $user->getRoles()))
+        {
             $form->add('roles', ChoiceType::class, [
                 'choices' => ['ROLE_ADMIN' => 'ROLE_ADMIN', 'ROLE_USER' => 'ROLE_USER'],
                 'expanded' => true,
                 'multiple' => true,
                 ]
             );
+        }
+
+        if ($this->route != 'app_register')
+        {
+            $form->add('office',null,[
+                'choice_label'=>function($company) {
+                    return $company->getNome();
+                }
+            ]);
         }
     }
 }
