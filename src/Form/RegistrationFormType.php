@@ -51,17 +51,12 @@ class RegistrationFormType extends AbstractType
 
             ->add('username')
 
-            ->add('office')
-
-
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
+            ->add('office', null, [
+                'choice_label' => function($company) {
+                return $company->getNome();
+                }
             ])
+
         ;
         $builder->addEventListener(FormEvents::POST_SET_DATA, [$this, 'onPostSetData']);
     }

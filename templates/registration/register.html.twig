@@ -1,20 +1,36 @@
-{% extends 'base.html.twig' %}
-
+{% extends '@AdminLTE/layout/default-layout.html.twig' %}
 {% block title %}Registrar novo usuario{% endblock %}
 
-{% block body %}
+{% block navbar_messages %} {% endblock %}
+{% block navbar_notifications %} {% endblock %}
+{% block navbar_tasks %} {% endblock %}
+{% block navbar_user %} {% endblock %}
+
+{% block sidebar_nav %}
+{{ include('admin_navbar.html.twig') }}
+{% endblock %}
+
+{% block page_content %}
+
     <h1>Register</h1>
+
+    {{ form_start(registrationCompanyForm) }}
+
+        {{form_row(registrationCompanyForm.cnpj)}}
+        {{form_row(registrationCompanyForm.nome)}}
+
+    {{ form_end(registrationCompanyForm) }}
 
     {{ form_start(registrationForm) }}
 
+        
         {{form_row(registrationForm.username)}}
         {{ form_row(registrationForm.email) }}
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
         {{ form_row(registrationForm.office)}}
-        {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" class="btnbig">Register</button>
     {{ form_end(registrationForm) }}
 {% endblock %}

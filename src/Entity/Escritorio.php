@@ -36,6 +36,9 @@ class Escritorio
 
     private $name = '';
 
+    #[ORM\Column(type: 'string', length: 18)]
+    private $cnpj;
+
     public function __construct()
     {
         $this->user_office = new ArrayCollection();
@@ -136,5 +139,17 @@ class Escritorio
     public function __toString(): string
     {
         return $this->name;
+    }
+
+    public function getCnpj(): ?string
+    {
+        return $this->cnpj;
+    }
+
+    public function setCnpj(string $cnpj): self
+    {
+        $this->cnpj = $cnpj;
+
+        return $this;
     }
 }

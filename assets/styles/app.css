@@ -1,6 +1,4 @@
-@import '~bootstrap';
-@import '~@fortawesome/fontawesome-free';
-@import '~@fontsource/roboto-condensed';
+
 
 body {
     background-color: lightgray;
@@ -10,7 +8,7 @@ tr:nth-child(even) {
     background-color: #999;
   }
 
-.btn {
+.btnbig {
     display: inline-block;
     padding: 15px 25px;
     font-size: 18px;
@@ -23,6 +21,7 @@ tr:nth-child(even) {
     border: none;
     border-radius: 15px;
     box-shadow: 0 9px #999;
+    margin: 15px;
   }
 
   .btnsmall {
@@ -50,22 +49,4 @@ tr:nth-child(even) {
     color: #fff;
     transform: translateY(4px);
   }
-
-  .redirect_link {
-    margin: 20px 0px;
-    text-decoration: none;
-    color: #fff;
-  }
-
-  .redirect_link:visited, .redirect_link:hover, .redirect_link:active {
-    text-decoration: none;
-    color: #fff;
-  }
-
-  .login_form {
-    text-align: center;
-    width: 40%;
-    margin: auto;
-    border: 3px solid #666;
-    padding: 10px;
-  }
+  

@@ -1,14 +1,22 @@
-{% extends 'base.html.twig' %}
+{% extends '@AdminLTE/layout/default-layout.html.twig' %}
 
-{% block title %}Usuario{% endblock %}
+{% block title %}Usuarios{% endblock %}
 
-{% block body %}
+{% block navbar_messages %} {% endblock %}
+{% block navbar_notifications %} {% endblock %}
+{% block navbar_tasks %} {% endblock %}
+{% block navbar_user %} {% endblock %}
 
-    {{ block ("navbar", "navbar.html.twig") }}
+{% block sidebar_nav %}
+{{ include('admin_navbar.html.twig') }}
+{% endblock %}
+
+{% block page_content %}
 
     <h1>Usuario</h1>
 
-    <table class="table">
+    <div class="card-body table-responsive p-0">
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>Id</th>
@@ -44,5 +52,6 @@
         {% endfor %}
         </tbody>
     </table>
-    <a class="redirect_link btn" href="{{ path('app_register') }}">Criar Novo</a>
+    </div>
+    <a class="redirect_link btnbig" href="{{ path('app_register') }}">Criar Novo</a>
 {% endblock %}

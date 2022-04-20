@@ -1,11 +1,17 @@
-{% extends 'base.html.twig' %}
+{% extends '@AdminLTE/layout/default-layout.html.twig' %}
 
 {% block title %}Escritorio{% endblock %}
 
-{% block body %}
+{% block navbar_messages %} {% endblock %}
+{% block navbar_notifications %} {% endblock %}
+{% block navbar_tasks %} {% endblock %}
+{% block navbar_user %} {% endblock %}
 
-    {{ block ("navbar", "navbar.html.twig") }}
-    <h1>Escritorio</h1>
+{% block sidebar_nav %}
+{{ include('admin_navbar.html.twig') }}
+{% endblock %}
+
+{% block page_content %}
 
     <table class="table">
         <thead>
@@ -39,5 +45,5 @@
         </tbody>
     </table>
 
-    <a class ="redirect_link btn" href="{{ path('app_escritorio_new') }}">Criar Novo</a>
+    <a class ="redirect_link btn btnbig" href="{{ path('app_escritorio_new') }}">Criar Novo</a>
 {% endblock %}

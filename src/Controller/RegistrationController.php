@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Usuario;
+use App\Entity\Escritorio;
+use App\Form\EscritorioType;
 use App\Form\RegistrationFormType;
 use App\Security\LoginFromAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,6 +23,10 @@ class RegistrationController extends AbstractController
         $user = new Usuario();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
+
+        $escritorio = new Escritorio();
+        $form2 = $this->createForm(EscritorioType::class, $escritorio);
+        $form2->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
@@ -44,6 +50,7 @@ class RegistrationController extends AbstractController
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
+            'registrationCompanyForm' => $form2->createView(),
         ]);
     }
 }

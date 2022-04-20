@@ -15,7 +15,11 @@ class MedicoType extends AbstractType
             ->add('nome')
             ->add('crm')
             ->add('phone')
-            ->add('company_id')
+            ->add('company_id',null,[
+                'choice_label'=>function($company) {
+                    return $company->getId().' - '. $company->getNome();
+                }
+            ])
         ;
     }
 

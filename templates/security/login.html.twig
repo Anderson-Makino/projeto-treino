@@ -1,5 +1,47 @@
-{% extends 'base.html.twig' %}
+{% extends '@AdminLTE/FOSUserBundle/layout.html.twig' %}
 
+
+{% block logo_login %}<img style="border-radius:50%; padding-top:0px" src="https://pbs.twimg.com/profile_images/1500877006506012677/zOh3xtKr_400x400.png">{% endblock %}
+
+{% block login_box_error %}
+    {% if error is not defined or error is empty %}
+        {% set error = {'messageKey': 'Login with "admin/password" or "user/password"', 'messageData': {}} %}
+    {% endif %}
+    {{ parent() }}
+{% endblock %}
+
+{% block login_form %}
+
+<form class="login_form" method="post">
+{% if app.user %}
+    <div class="mb-3">
+        Voce esta logado como {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+    </div>
+{% endif %}
+<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <label for="inputEmail">Email</label>
+    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+    <label for="inputPassword">Senha</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+    <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+    
+
+    <button class="btn btn-lg btn-primary" type="submit" style="margin: 20px;">
+        Sign in
+    </button>
+</form>
+
+{% endblock %}
+
+{#
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
@@ -33,10 +75,11 @@
                 <input type="checkbox" name="_remember_me"> Remember me
             </label>
         </div>
-    #}
+    
 
     <button class="btn btn-lg btn-primary" type="submit" style="margin: 20px;">
         Sign in
     </button>
 </form>
 {% endblock %}
+#}

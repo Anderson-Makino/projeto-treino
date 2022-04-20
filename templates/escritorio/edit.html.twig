@@ -1,15 +1,24 @@
-{% extends 'base.html.twig' %}
+{% extends '@AdminLTE/layout/default-layout.html.twig' %}
 
 {% block title %}Editar Escritorio{% endblock %}
 
-{% block body %}
+{% block navbar_messages %} {% endblock %}
+{% block navbar_notifications %} {% endblock %}
+{% block navbar_tasks %} {% endblock %}
+{% block navbar_user %} {% endblock %}
 
-    {{ block ("navbar", "navbar.html.twig") }}
+{% block sidebar_nav %}
+{{ include('admin_navbar.html.twig') }}
+{% endblock %}
+
+{% block page_content %}
+
+    
     <h1>Editar Escritorio</h1>
 
     {{ include('escritorio/_form.html.twig', {'button_label': 'Atualizar'}) }}
 
-    <a class ="redirect_link btn" href="{{ path('app_escritorio_index') }}">Retornar a Lista</a>
+    <a class ="redirect_link btn btnbig" href="{{ path('app_escritorio_index') }}">Retornar a Lista</a>
 
     {{ include('escritorio/_delete_form.html.twig') }}
 {% endblock %}

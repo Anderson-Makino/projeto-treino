@@ -28,7 +28,11 @@ class UsuarioType extends AbstractType
             ->add('username')
             ->add('email')
             ->add('password')
-            ->add('office')
+            ->add('office',null,[
+                'choice_label'=>function($company) {
+                    return $company->getNome();
+                }
+            ])
         ;
         $builder->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'onPreSetData']);
     }

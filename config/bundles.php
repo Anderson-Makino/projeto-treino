@@ -12,4 +12,6 @@ return [
     Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class => ['all' => true],
     EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle::class => ['all' => true],
     Symfony\UX\Turbo\TurboBundle::class => ['all' => true],
+    KevinPapst\AdminLTEBundle\AdminLTEBundle::class => ['all' => true],
+    Twig\Extra\TwigExtraBundle\TwigExtraBundle::class => ['all' => true],
 ];

@@ -16,7 +16,11 @@ class FuncionarioType extends AbstractType
             ->add('email')
             ->add('phone')
             ->add('salario')
-            ->add('company_id')
+            ->add('company_id',null,[
+                'choice_label'=>function($company) {
+                    return $company->getId().' - '. $company->getNome();
+                }
+            ])
         ;
     }
 

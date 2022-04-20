@@ -86,6 +86,18 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.7"
     },
+    "kevinpapst/adminlte-bundle": {
+        "version": "3.6",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.9",
+            "ref": "36a77f782cd6f7cd761384c6a301fedf018e37e5"
+        },
+        "files": [
+            "config/packages/admin_lte.yaml"
+        ]
+    },
     "laminas/laminas-code": {
         "version": "4.5.1"
     },
@@ -160,6 +172,9 @@
     },
     "symfony/event-dispatcher-contracts": {
         "version": "v3.0.1"
+    },
+    "symfony/expression-language": {
+        "version": "v6.0.7"
     },
     "symfony/filesystem": {
         "version": "v6.0.7"
@@ -388,6 +403,12 @@
     },
     "symfony/yaml": {
         "version": "v6.0.3"
+    },
+    "twig/extra-bundle": {
+        "version": "v3.3.8"
+    },
+    "twig/string-extra": {
+        "version": "v3.3.5"
     },
     "twig/twig": {
         "version": "v3.3.10"
