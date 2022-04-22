@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MedicoRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MedicoRepository::class)]
@@ -59,6 +61,18 @@ class Medico
 
     #[ORM\Column(type: 'string', length: 250)]
     private $endereco;
+
+    #[ORM\OneToMany(mappedBy: 'medico', targetEntity: Exame::class)]
+    private $exame;
+
+    #[ORM\OneToMany(mappedBy: 'medico_aso', targetEntity: Aso::class)]
+    private $asos;
+
+    public function __construct()
+    {
+        $this->exame = new ArrayCollection();
+        $this->asos = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -246,6 +260,66 @@ class Medico
     public function setEndereco(string $endereco): self
     {
         $this->endereco = $endereco;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Exame>
+     */
+    public function getExame(): Collection
+    {
+        return $this->exame;
+    }
+
+    public function addExame(Exame $exame): self
+    {
+        if (!$this->exame->contains($exame)) {
+            $this->exame[] = $exame;
+            $exame->setMedico($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExame(Exame $exame): self
+    {
+        if ($this->exame->removeElement($exame)) {
+            // set the owning side to null (unless already changed)
+            if ($exame->getMedico() === $this) {
+                $exame->setMedico(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Aso>
+     */
+    public function getAsos(): Collection
+    {
+        return $this->asos;
+    }
+
+    public function addAso(Aso $aso): self
+    {
+        if (!$this->asos->contains($aso)) {
+            $this->asos[] = $aso;
+            $aso->setMedicoAso($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAso(Aso $aso): self
+    {
+        if ($this->asos->removeElement($aso)) {
+            // set the owning side to null (unless already changed)
+            if ($aso->getMedicoAso() === $this) {
+                $aso->setMedicoAso(null);
+            }
+        }
 
         return $this;
     }

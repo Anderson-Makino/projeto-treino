@@ -1,0 +1,48 @@
+{% extends '@AdminLTE/layout/default-layout.html.twig' %}
+
+{% block title %}Aso index{% endblock %}
+
+{% block navbar_messages %} {% endblock %}
+{% block navbar_notifications %} {% endblock %}
+{% block navbar_tasks %} {% endblock %}
+{% block navbar_user %} {% endblock %}
+
+{% block sidebar_nav %}
+{{ include('admin_navbar.html.twig') }}
+{% endblock %}
+
+{% block page_content %}
+    <h1>Aso index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DtAso</th>
+                <th>Tipo</th>
+                <th>Resultado</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for aso in asos %}
+            <tr>
+                <td>{{ aso.id }}</td>
+                <td>{{ aso.dtAso ? aso.dtAso|date('Y-m-d') : '' }}</td>
+                <td>{{ aso.tipo }}</td>
+                <td>{{ aso.resultado }}</td>
+                <td>
+                    <a class="btnsmall" href="{{ path('app_aso_show', {'id': aso.id}) }}">show</a>
+                    <a class="btnsmall" href="{{ path('app_aso_edit', {'id': aso.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class ="redirect_link btn btnbig" href="{{ path('app_aso_new') }}">Create new</a>
+{% endblock %}

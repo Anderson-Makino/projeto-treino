@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\FuncionarioRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FuncionarioRepository::class)]
@@ -60,6 +62,20 @@ class Funcionario
 
     #[ORM\Column(type: 'string', length: 250)]
     private $endereco;
+
+    #[ORM\Column(type: 'string', length: 30)]
+    private $matricula;
+
+    #[ORM\Column(type: 'string', length: 3)]
+    private $categoria;
+
+    #[ORM\OneToMany(mappedBy: 'funcionario', targetEntity: Aso::class)]
+    private $asos;
+
+    public function __construct()
+    {
+        $this->asos = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -254,6 +270,60 @@ class Funcionario
     public function setEndereco(string $endereco): self
     {
         $this->endereco = $endereco;
+
+        return $this;
+    }
+
+    public function getMatricula(): ?string
+    {
+        return $this->matricula;
+    }
+
+    public function setMatricula(string $matricula): self
+    {
+        $this->matricula = $matricula;
+
+        return $this;
+    }
+
+    public function getCategoria(): ?string
+    {
+        return $this->categoria;
+    }
+
+    public function setCategoria(string $categoria): self
+    {
+        $this->categoria = $categoria;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Aso>
+     */
+    public function getAsos(): Collection
+    {
+        return $this->asos;
+    }
+
+    public function addAso(Aso $aso): self
+    {
+        if (!$this->asos->contains($aso)) {
+            $this->asos[] = $aso;
+            $aso->setFuncionario($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAso(Aso $aso): self
+    {
+        if ($this->asos->removeElement($aso)) {
+            // set the owning side to null (unless already changed)
+            if ($aso->getFuncionario() === $this) {
+                $aso->setFuncionario(null);
+            }
+        }
 
         return $this;
     }

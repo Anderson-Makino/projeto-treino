@@ -39,8 +39,6 @@ class Empresa
     #[ORM\OneToMany(mappedBy: 'company_id', targetEntity: Funcionario::class)]
     private $funcionario_id;
 
-    private $name = '';
-
     #[ORM\Column(type: 'string', length: 8)]
     private $cep;
 
@@ -68,11 +66,17 @@ class Empresa
     #[ORM\Column(type: 'string', length: 200)]
     private $email;
 
+    #[ORM\OneToMany(mappedBy: 'empresa', targetEntity: Aso::class)]
+    private $asos;
+
+    private $name = '';
+
     public function __construct()
     {
         $this->company_office = new ArrayCollection();
         $this->medico_id = new ArrayCollection();
         $this->funcionario_id = new ArrayCollection();
+        $this->asos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -339,6 +343,36 @@ class Empresa
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Aso>
+     */
+    public function getAsos(): Collection
+    {
+        return $this->asos;
+    }
+
+    public function addAsos(Aso $asos): self
+    {
+        if (!$this->asos->contains($asos)) {
+            $this->asos[] = $asos;
+            $asos->setEmpresa($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAsos(Aso $asos): self
+    {
+        if ($this->asos->removeElement($asos)) {
+            // set the owning side to null (unless already changed)
+            if ($asos->getEmpresa() === $this) {
+                $asos->setEmpresa(null);
+            }
+        }
 
         return $this;
     }

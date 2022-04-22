@@ -1,0 +1,56 @@
+{% extends '@AdminLTE/layout/default-layout.html.twig' %}
+
+
+{% block title %}Exame{% endblock %}
+
+{% block navbar_messages %} {% endblock %}
+{% block navbar_notifications %} {% endblock %}
+{% block navbar_tasks %} {% endblock %}
+{% block navbar_user %} {% endblock %}
+
+{% block sidebar_nav %}
+{{ include('admin_navbar.html.twig') }}
+{% endblock %}
+
+{% block page_content %}
+    <h1>Exame</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ exame.id }}</td>
+            </tr>
+            <tr>
+                <th>DtExm</th>
+                <td>{{ exame.dtExm ? exame.dtExm|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>ProcRealizado</th>
+                <td>{{ exame.procRealizado }}</td>
+            </tr>
+            <tr>
+                <th>Observacao</th>
+                <td>{{ exame.observacao }}</td>
+            </tr>
+            <tr>
+                <th>OrdemExm</th>
+                <td>{{ exame.ordemExm }}</td>
+            </tr>
+            <tr>
+                <th>Resultado</th>
+                <td>{{ exame.resultado }}</td>
+            </tr>
+            <tr>
+                <th>Vencimento</th>
+                <td>{{ exame.vencimento ? exame.vencimento|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class ="redirect_link btn btnbig" href="{{ path('app_exame_index') }}">back to list</a>
+
+    <a class ="redirect_link btn btnbig" href="{{ path('app_exame_edit', {'id': exame.id}) }}">edit</a>
+
+    {{ include('exame/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends '@AdminLTE/layout/default-layout.html.twig' %}
+
+{% block title %}Exame index{% endblock %}
+
+{% block navbar_messages %} {% endblock %}
+{% block navbar_notifications %} {% endblock %}
+{% block navbar_tasks %} {% endblock %}
+{% block navbar_user %} {% endblock %}
+
+{% block sidebar_nav %}
+{{ include('admin_navbar.html.twig') }}
+{% endblock %}
+
+{% block page_content %}
+    <h1>Exame index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DtExm</th>
+                <th>ProcRealizado</th>
+                <th>Observacao</th>
+                <th>OrdemExm</th>
+                <th>Resultado</th>
+                <th>Vencimento</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for exame in exames %}
+            <tr>
+                <td>{{ exame.id }}</td>
+                <td>{{ exame.dtExm ? exame.dtExm|date('Y-m-d') : '' }}</td>
+                <td>{{ exame.procRealizado }}</td>
+                <td>{{ exame.observacao }}</td>
+                <td>{{ exame.ordemExm }}</td>
+                <td>{{ exame.resultado }}</td>
+                <td>{{ exame.vencimento ? exame.vencimento|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a class="btnsmall" href="{{ path('app_exame_show', {'id': exame.id}) }}">show</a>
+                    <a class="btnsmall" href="{{ path('app_exame_edit', {'id': exame.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class ="redirect_link btn btnbig" href="{{ path('app_exame_new') }}">Create new</a>
+{% endblock %}

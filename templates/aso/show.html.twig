@@ -1,0 +1,43 @@
+{% extends '@AdminLTE/layout/default-layout.html.twig' %}
+
+{% block title %}Aso{% endblock %}
+
+{% block navbar_messages %} {% endblock %}
+{% block navbar_notifications %} {% endblock %}
+{% block navbar_tasks %} {% endblock %}
+{% block navbar_user %} {% endblock %}
+
+{% block sidebar_nav %}
+{{ include('admin_navbar.html.twig') }}
+{% endblock %}
+
+{% block page_content %}
+    <h1>Aso</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ aso.id }}</td>
+            </tr>
+            <tr>
+                <th>DtAso</th>
+                <td>{{ aso.dtAso ? aso.dtAso|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Tipo</th>
+                <td>{{ aso.tipo }}</td>
+            </tr>
+            <tr>
+                <th>Resultado</th>
+                <td>{{ aso.resultado }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class ="redirect_link btn btnbig" href="{{ path('app_aso_index') }}">back to list</a>
+
+    <a class ="redirect_link btn btnbig" href="{{ path('app_aso_edit', {'id': aso.id}) }}">edit</a>
+
+    {{ include('aso/_delete_form.html.twig') }}
+{% endblock %}
