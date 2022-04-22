@@ -9,6 +9,8 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class EscritorioType extends AbstractType
 {
@@ -24,9 +26,31 @@ class EscritorioType extends AbstractType
     {
         $builder
             ->add('nome')
-            ->add('cnpj')
+            ->add('email')
+            ->add('cnpj', null, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter a CNPJ',
+                    ]),
+                    new Length([
+                        'min' => 14,
+                        'minMessage' => 'CNPJ have 14 digits',
+                        'max' => 14,
+                    ]),
+                ],
+            ])
+
+            ->add('phone')
+            ->add('celular')
+            ->add('descricao')
+            ->add('cep')
+            ->add('endereco')
+            ->add('numero')
+            ->add('complemento')
+            ->add('bairro')
+            ->add('cidade')
+            ->add('uf')
             ;
-            $builder->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'onPreSetData']);
     }
 
 

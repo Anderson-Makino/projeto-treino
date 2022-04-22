@@ -13,8 +13,18 @@ class MedicoType extends AbstractType
     {
         $builder
             ->add('nome')
+            ->add('email')
             ->add('crm')
+            ->add('cpf')
             ->add('phone')
+            ->add('celular')
+            ->add('cep')
+            ->add('endereco')
+            ->add('numero')
+            ->add('complemento')
+            ->add('bairro')
+            ->add('cidade')
+            ->add('uf')
             ->add('company_id',null,[
                 'choice_label'=>function($company) {
                     return $company->getId().' - '. $company->getNome();

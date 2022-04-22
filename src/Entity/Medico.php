@@ -30,6 +30,36 @@ class Medico
 
     private $name = '';
 
+    #[ORM\Column(type: 'string', length: 11)]
+    private $cpf;
+
+    #[ORM\Column(type: 'string', length: 8)]
+    private $cep;
+
+    #[ORM\Column(type: 'string', length: 4)]
+    private $numero;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $complemento;
+
+    #[ORM\Column(type: 'string', length: 200)]
+    private $bairro;
+
+    #[ORM\Column(type: 'string', length: 100)]
+    private $cidade;
+
+    #[ORM\Column(type: 'string', length: 50)]
+    private $uf;
+
+    #[ORM\Column(type: 'string', length: 11, nullable: true)]
+    private $celular;
+
+    #[ORM\Column(type: 'string', length: 200)]
+    private $email;
+
+    #[ORM\Column(type: 'string', length: 250)]
+    private $endereco;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -98,5 +128,125 @@ class Medico
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function getCpf(): ?string
+    {
+        return $this->cpf;
+    }
+
+    public function setCpf(string $cpf): self
+    {
+        $this->cpf = $cpf;
+
+        return $this;
+    }
+
+    public function getCep(): ?string
+    {
+        return $this->cep;
+    }
+
+    public function setCep(string $cep): self
+    {
+        $this->cep = $cep;
+
+        return $this;
+    }
+
+    public function getNumero(): ?string
+    {
+        return $this->numero;
+    }
+
+    public function setNumero(string $numero): self
+    {
+        $this->numero = $numero;
+
+        return $this;
+    }
+
+    public function getComplemento(): ?string
+    {
+        return $this->complemento;
+    }
+
+    public function setComplemento(?string $complemento): self
+    {
+        $this->complemento = $complemento;
+
+        return $this;
+    }
+
+    public function getBairro(): ?string
+    {
+        return $this->bairro;
+    }
+
+    public function setBairro(string $bairro): self
+    {
+        $this->bairro = $bairro;
+
+        return $this;
+    }
+
+    public function getCidade(): ?string
+    {
+        return $this->cidade;
+    }
+
+    public function setCidade(string $cidade): self
+    {
+        $this->cidade = $cidade;
+
+        return $this;
+    }
+
+    public function getUf(): ?string
+    {
+        return $this->uf;
+    }
+
+    public function setUf(string $uf): self
+    {
+        $this->uf = $uf;
+
+        return $this;
+    }
+
+    public function getCelular(): ?string
+    {
+        return $this->celular;
+    }
+
+    public function setCelular(?string $celular): self
+    {
+        $this->celular = $celular;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getEndereco(): ?string
+    {
+        return $this->endereco;
+    }
+
+    public function setEndereco(string $endereco): self
+    {
+        $this->endereco = $endereco;
+
+        return $this;
     }
 }

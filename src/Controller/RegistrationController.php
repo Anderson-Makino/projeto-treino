@@ -6,6 +6,7 @@ use App\Entity\Usuario;
 use App\Entity\Escritorio;
 use App\Form\EscritorioType;
 use App\Form\RegistrationFormType;
+use App\Repository\EscritorioRepository;
 use App\Security\LoginFromAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,15 +19,11 @@ use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, LoginFromAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, LoginFromAuthenticator $authenticator, EntityManagerInterface $entityManager, EscritorioRepository $escritorioRepository): Response
     {
         $user = new Usuario();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
-
-        $escritorio = new Escritorio();
-        $form2 = $this->createForm(EscritorioType::class, $escritorio);
-        $form2->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
@@ -36,6 +33,11 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+
+            $cnpj = $form->get('cnpj')->getData();
+            $nome_escritorio = $form->get('nome')->getData();
+            $office = $escritorioRepository->findOneBy(array('cnpj' => $cnpj, 'nome' => $nome_escritorio));
+            $user->addOffice($office);
 
             $entityManager->persist($user);
             $entityManager->flush();
@@ -50,7 +52,6 @@ class RegistrationController extends AbstractController
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
-            'registrationCompanyForm' => $form2->createView(),
         ]);
     }
 }

@@ -13,9 +13,18 @@ class EmpresaType extends AbstractType
     {
         $builder
             ->add('nome')
+            ->add('cep')
             ->add('endereco')
+            ->add('numero')
+            ->add('complemento')
+            ->add('bairro')
+            ->add('cidade')
+            ->add('uf')
             ->add('phone')
+            ->add('celular')
             ->add('descricao')
+            ->add('email')
+            ->add('cpf_responsavel')
         ;
     }
 

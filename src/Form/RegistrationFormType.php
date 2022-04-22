@@ -6,11 +6,9 @@ use App\Entity\Usuario;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -56,6 +54,25 @@ class RegistrationFormType extends AbstractType
                 return $company->getNome();
                 }
             ])*/
+
+            ->add('cnpj', null, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter a CNPJ',
+                    ]),
+                    new Length([
+                        'min' => 14,
+                        'minMessage' => 'CNPJ have 14 digits',
+                        'max' => 14,
+                    ]),
+                ],
+                'mapped' => false,
+            ],
+            
+            )
+            ->add('nome', null, array(
+                'mapped' => false
+            ))
 
         ;
         $builder->addEventListener(FormEvents::POST_SET_DATA, [$this, 'onPostSetData']);

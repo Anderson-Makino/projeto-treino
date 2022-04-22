@@ -36,8 +36,32 @@ class Escritorio
 
     private $name = '';
 
-    #[ORM\Column(type: 'string', length: 18)]
+    #[ORM\Column(type: 'string', length: 14)]
     private $cnpj;
+
+    #[ORM\Column(type: 'string', length: 8)]
+    private $cep;
+
+    #[ORM\Column(type: 'string', length: 4)]
+    private $numero;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $complemento;
+
+    #[ORM\Column(type: 'string', length: 200)]
+    private $bairro;
+
+    #[ORM\Column(type: 'string', length: 100)]
+    private $cidade;
+
+    #[ORM\Column(type: 'string', length: 50)]
+    private $uf;
+
+    #[ORM\Column(type: 'string', length: 11, nullable: true)]
+    private $celular;
+
+    #[ORM\Column(type: 'string', length: 200)]
+    private $email;
 
     public function __construct()
     {
@@ -149,6 +173,102 @@ class Escritorio
     public function setCnpj(string $cnpj): self
     {
         $this->cnpj = $cnpj;
+
+        return $this;
+    }
+
+    public function getCep(): ?string
+    {
+        return $this->cep;
+    }
+
+    public function setCep(string $cep): self
+    {
+        $this->cep = $cep;
+
+        return $this;
+    }
+
+    public function getNumero(): ?string
+    {
+        return $this->numero;
+    }
+
+    public function setNumero(string $numero): self
+    {
+        $this->numero = $numero;
+
+        return $this;
+    }
+
+    public function getComplemento(): ?string
+    {
+        return $this->complemento;
+    }
+
+    public function setComplemento(?string $complemento): self
+    {
+        $this->complemento = $complemento;
+
+        return $this;
+    }
+
+    public function getBairro(): ?string
+    {
+        return $this->bairro;
+    }
+
+    public function setBairro(string $bairro): self
+    {
+        $this->bairro = $bairro;
+
+        return $this;
+    }
+
+    public function getCidade(): ?string
+    {
+        return $this->cidade;
+    }
+
+    public function setCidade(string $cidade): self
+    {
+        $this->cidade = $cidade;
+
+        return $this;
+    }
+
+    public function getUf(): ?string
+    {
+        return $this->uf;
+    }
+
+    public function setUf(string $uf): self
+    {
+        $this->uf = $uf;
+
+        return $this;
+    }
+
+    public function getCelular(): ?string
+    {
+        return $this->celular;
+    }
+
+    public function setCelular(?string $celular): self
+    {
+        $this->celular = $celular;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
 
         return $this;
     }

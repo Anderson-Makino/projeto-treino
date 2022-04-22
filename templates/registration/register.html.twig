@@ -14,16 +14,12 @@
 
     <h1>Register</h1>
 
-    {{ form_start(registrationCompanyForm) }}
-
-        {{form_row(registrationCompanyForm.cnpj)}}
-        {{form_row(registrationCompanyForm.nome)}}
-
-    {{ form_end(registrationCompanyForm) }}
+    {{ form_errors(registrationForm) }}
 
     {{ form_start(registrationForm) }}
 
-        
+        {{form_row(registrationForm.cnpj)}}
+        {{form_row(registrationForm.nome)}}
         {{form_row(registrationForm.username)}}
         {{ form_row(registrationForm.email) }}
         {{ form_row(registrationForm.plainPassword, {
