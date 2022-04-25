@@ -18,6 +18,6 @@ admin_lte:
         enable: false
 
     routes:
-        adminlte_welcome: app_login
+        adminlte_welcome: app_usuario_index
         adminlte_login: app_login
         adminlte_profile: profile
