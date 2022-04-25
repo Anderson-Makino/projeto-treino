@@ -26,6 +26,8 @@ class FuncionarioType extends AbstractType
             ->add('bairro')
             ->add('cidade')
             ->add('uf')
+            ->add('matricula')
+            ->add('categoria')
             ->add('company_id',null,[
                 'choice_label'=>function($company) {
                     return $company->getId().' - '. $company->getNome();

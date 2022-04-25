@@ -22,7 +22,7 @@
             </tr>
             <tr>
                 <th>DtAso</th>
-                <td>{{ aso.dtAso ? aso.dtAso|date('Y-m-d') : '' }}</td>
+                <td>{{ aso.dtAso ? aso.dtAso|date('d-m-Y') : '' }}</td>
             </tr>
             <tr>
                 <th>Tipo</th>
@@ -31,6 +31,26 @@
             <tr>
                 <th>Resultado</th>
                 <td>{{ aso.resultado }}</td>
+            </tr>
+            <tr>
+                <th>Empregado</th>
+                <td>{{ funcionario.nome }}</td>
+            </tr>
+            <tr>
+                <th>Empresa</th>
+                <td>{{ empresa.nome }}</td>
+            </tr>
+            <tr>
+                <th>Medico</th>
+                <td>{{ medico.crm }}</td>
+            </tr>
+            <tr>
+                <th>Medico Responsavel</th>
+                <td>
+                {% if medicoResponsavel %}
+                    {{ medicoResponsavel.crm }}
+                {% endif %}
+                </td>
             </tr>
         </tbody>
     </table>

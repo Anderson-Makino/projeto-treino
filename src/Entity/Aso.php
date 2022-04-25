@@ -35,6 +35,7 @@ class Aso
     private $medico_aso;
 
     #[ORM\ManyToOne(targetEntity: Medico::class, inversedBy: 'asos')]
+    #[ORM\JoinColumn(nullable: true)]
     private $medico_pcmso;
 
     public function getId(): ?int

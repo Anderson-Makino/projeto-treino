@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Aso;
+use App\Entity\Empresa;
+use App\Entity\Funcionario;
+use App\Entity\Medico;
 use App\Form\AsoType;
 use App\Repository\AsoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,6 +21,7 @@ class AsoController extends AbstractController
     {
         return $this->render('aso/index.html.twig', [
             'asos' => $asoRepository->findAll(),
+
         ]);
     }
 
@@ -40,10 +44,18 @@ class AsoController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_aso_show', methods: ['GET'])]
-    public function show(Aso $aso): Response
+    public function show(Aso $aso, Empresa $empresa, Funcionario $funcionario, Medico $medico, Medico $medico2): Response
     {
+        $empresa = $aso->getEmpresa();
+        $funcionario = $aso->getFuncionario();
+        $medico = $aso->getMedicoAso();
+        $medico2 = $aso->getMedicoPcmso();
         return $this->render('aso/show.html.twig', [
             'aso' => $aso,
+            'empresa' => $empresa,
+            'funcionario' => $funcionario,
+            'medico' => $medico,
+            'medicoResponsavel' => $medico2,
         ]);
     }
 

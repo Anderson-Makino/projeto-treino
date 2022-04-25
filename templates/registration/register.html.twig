@@ -1,14 +1,6 @@
 {% extends '@AdminLTE/layout/default-layout.html.twig' %}
 {% block title %}Registrar novo usuario{% endblock %}
 
-{% block navbar_messages %} {% endblock %}
-{% block navbar_notifications %} {% endblock %}
-{% block navbar_tasks %} {% endblock %}
-{% block navbar_user %} {% endblock %}
-
-{% block sidebar_nav %}
-{{ include('admin_navbar.html.twig') }}
-{% endblock %}
 
 {% block page_content %}
 
@@ -27,5 +19,6 @@
         }) }}
 
         <button type="submit" class="btnbig">Register</button>
+        <a href="{{ path('app_login') }}">Retornar a tela de login</a>
     {{ form_end(registrationForm) }}
 {% endblock %}

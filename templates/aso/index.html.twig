@@ -28,7 +28,7 @@
         {% for aso in asos %}
             <tr>
                 <td>{{ aso.id }}</td>
-                <td>{{ aso.dtAso ? aso.dtAso|date('Y-m-d') : '' }}</td>
+                <td>{{ aso.dtAso ? aso.dtAso|date('d-m-Y') : '' }}</td>
                 <td>{{ aso.tipo }}</td>
                 <td>{{ aso.resultado }}</td>
                 <td>

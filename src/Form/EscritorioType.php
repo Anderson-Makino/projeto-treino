@@ -50,6 +50,11 @@ class EscritorioType extends AbstractType
             ->add('bairro')
             ->add('cidade')
             ->add('uf')
+            ->add('office_company',null,[
+                'choice_label'=>function($company) {
+                    return $company->getId().' - '. $company->getNome();
+                }
+            ])
             ;
     }
 

@@ -23,7 +23,7 @@
             </tr>
             <tr>
                 <th>DtExm</th>
-                <td>{{ exame.dtExm ? exame.dtExm|date('Y-m-d') : '' }}</td>
+                <td>{{ exame.dtExm ? exame.dtExm|date('d-m-Y') : '' }}</td>
             </tr>
             <tr>
                 <th>ProcRealizado</th>
@@ -31,7 +31,13 @@
             </tr>
             <tr>
                 <th>Observacao</th>
-                <td>{{ exame.observacao }}</td>
+                <td>
+                    {% if exame.observacao is null %}
+                        Sem Observação
+                    {% else %}
+                        {{ exame.observacao }}
+                    {% endif %}
+                </td>
             </tr>
             <tr>
                 <th>OrdemExm</th>
@@ -43,7 +49,7 @@
             </tr>
             <tr>
                 <th>Vencimento</th>
-                <td>{{ exame.vencimento ? exame.vencimento|date('Y-m-d') : '' }}</td>
+                <td>{{ exame.vencimento ? exame.vencimento|date('d-m-Y') : '' }}</td>
             </tr>
         </tbody>
     </table>
