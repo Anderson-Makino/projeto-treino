@@ -33,8 +33,11 @@ class AsoController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $asoRepository->add($aso);
-            return $this->redirectToRoute('app_aso_index', [], Response::HTTP_SEE_OTHER);
+            if ($form['medico_aso']->getData() != $form['medico_pcmso']->getData())
+            {
+                $asoRepository->add($aso);
+                return $this->redirectToRoute('app_aso_index', [], Response::HTTP_SEE_OTHER);
+            }
         }
 
         return $this->renderForm('aso/new.html.twig', [
@@ -44,7 +47,7 @@ class AsoController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_aso_show', methods: ['GET'])]
-    public function show(Aso $aso, Empresa $empresa, Funcionario $funcionario, Medico $medico, Medico $medico2): Response
+    public function show(Aso $aso): Response
     {
         $empresa = $aso->getEmpresa();
         $funcionario = $aso->getFuncionario();

@@ -2,4 +2,10 @@
 {{ form_start(form) }}
     {{ form_widget(form) }} 
     <button class="btnbig">{{ button_label|default('Save') }}</button>
+    <a class ="redirect_link btn btnbig" href="{{ path('app_usuario_index') }}">Retornar a Lista</a>
+    {% if app.request.get('_route') != 'app_usuario_new' %}
+    
+        {{ include('usuario/_delete_form.html.twig') }}
+    
+    {% endif %}
 {{ form_end(form) }}

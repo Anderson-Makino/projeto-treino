@@ -43,14 +43,14 @@
                 <td>{{ empresa.nome }}</td>
             </tr>
             <tr>
-                <th>Medico</th>
-                <td>{{ medico.crm }}</td>
+                <th>Medico - CRM</th>
+                <td> {{ medico.nome }} - {{ medico.crm }}</td>
             </tr>
             <tr>
-                <th>Medico Responsavel</th>
+                <th>Medico Responsavel - CRM</th>
                 <td>
                 {% if medicoResponsavel %}
-                    {{ medicoResponsavel.crm }}
+                    {{ medicoResponsavel.nome }} - {{ medicoResponsavel.crm }}
                 {% endif %}
                 </td>
             </tr>

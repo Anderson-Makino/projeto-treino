@@ -19,8 +19,4 @@
     <h1>Editar Medico</h1>
 
     {{ include('medico/_form.html.twig', {'button_label': 'Atualizar'}) }}
-
-    <a class ="redirect_link btn btnbig" href="{{ path('app_medico_index') }}">Retornar a Lista</a>
-
-    {{ include('medico/_delete_form.html.twig') }}
 {% endblock %}

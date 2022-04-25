@@ -47,8 +47,6 @@
             {% endif %}
         </tbody>
     </table>
-
-    <a class ="redirect_link btnbig" href="{{ path('app_usuario_index') }}">Retornar a Lista</a>
     <a class ="redirect_link btnbig" href="{{ path('app_usuario_edit', {'id': usuario.id}) }}">Editar</a>
 
     {{ include('usuario/_delete_form.html.twig') }}

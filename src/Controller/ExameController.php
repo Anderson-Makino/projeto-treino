@@ -31,8 +31,11 @@ class ExameController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $exameRepository->add($exame);
-            return $this->redirectToRoute('app_exame_index', [], Response::HTTP_SEE_OTHER);
+            if ($form['dtExm']->getData() < $form['vencimento']->getData())
+            {
+                $exameRepository->add($exame);
+                return $this->redirectToRoute('app_exame_index', [], Response::HTTP_SEE_OTHER);
+            }
         }
 
         return $this->renderForm('exame/new.html.twig', [
