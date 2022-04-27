@@ -40,7 +40,7 @@ class Aso
     #[ORM\JoinColumn(nullable: true)]
     private $medico_pcmso;
 
-    #[ORM\ManyToMany(targetEntity: Exame::class, mappedBy: 'aso')]
+    #[ORM\ManyToMany(targetEntity: Exame::class, mappedBy: 'aso', cascade: ['persist', 'remove'])]
     private $exames;
 
     public function __construct()
