@@ -42,7 +42,12 @@
             {% if office %}
             <tr>
                 <th>Office</th>
-                <td>{{ office.nome }}</td>
+                
+                <td class="list-group">
+                {% for offices in office %}
+                    {{ offices.nome }}
+                {% endfor %}
+                </td>
             </tr>
             {% endif %}
         </tbody>

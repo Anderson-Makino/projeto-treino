@@ -3,11 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Aso;
-use App\Entity\Empresa;
-use App\Entity\Funcionario;
-use App\Entity\Medico;
+use App\Entity\Exame;
 use App\Form\AsoType;
+use App\Form\ExameType;
 use App\Repository\AsoRepository;
+use App\Repository\ExameRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,22 +26,27 @@ class AsoController extends AbstractController
     }
 
     #[Route('/new', name: 'app_aso_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, AsoRepository $asoRepository): Response
+    public function new(Request $request, AsoRepository $asoRepository, ExameRepository $exameRepository): Response
     {
         $aso = new Aso();
+        $exame = new Exame();
+        $aso->getExames()->add($exame);
         $form = $this->createForm(AsoType::class, $aso);
+        
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
             if ($form['medico_aso']->getData() != $form['medico_pcmso']->getData())
             {
                 $asoRepository->add($aso);
+                $exameRepository->add($exame);
                 return $this->redirectToRoute('app_aso_index', [], Response::HTTP_SEE_OTHER);
             }
         }
 
         return $this->renderForm('aso/new.html.twig', [
             'aso' => $aso,
+            'exames' => $exame,
             'form' => $form,
         ]);
     }

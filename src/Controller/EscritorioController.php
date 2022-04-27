@@ -41,7 +41,7 @@ class EscritorioController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_escritorio_show', methods: ['GET'])]
-    public function show(Escritorio $escritorio, Empresa $empresa): Response
+    public function show(Escritorio $escritorio): Response
     {
         $empresa = $escritorio->getOfficeCompany();
         return $this->render('escritorio/show.html.twig', [

@@ -46,7 +46,7 @@ class UsuarioController extends AbstractController
         $office = $usuario->getOffice();
         return $this->render('usuario/show.html.twig', [
             'usuario' => $usuario,
-            'office' => $office[0],
+            'office' => $office,
         ]);
     }
 

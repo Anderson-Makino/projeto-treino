@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AsoRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AsoRepository::class)]
@@ -22,7 +24,7 @@ class Aso
     #[ORM\Column(type: 'string', length: 50)]
     private $resultado;
 
-    #[ORM\ManyToOne(targetEntity: Empresa::class, inversedBy: 'empregado')]
+    #[ORM\ManyToOne(targetEntity: Empresa::class, inversedBy: 'asos')]
     #[ORM\JoinColumn(nullable: false)]
     private $empresa;
 
@@ -37,6 +39,14 @@ class Aso
     #[ORM\ManyToOne(targetEntity: Medico::class, inversedBy: 'asos')]
     #[ORM\JoinColumn(nullable: true)]
     private $medico_pcmso;
+
+    #[ORM\ManyToMany(targetEntity: Exame::class, mappedBy: 'aso')]
+    private $exames;
+
+    public function __construct()
+    {
+        $this->exames = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -123,6 +133,33 @@ class Aso
     public function setMedicoPcmso(?Medico $medico_pcmso): self
     {
         $this->medico_pcmso = $medico_pcmso;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Exame>
+     */
+    public function getExames(): Collection
+    {
+        return $this->exames;
+    }
+
+    public function addExame(Exame $exame): self
+    {
+        if (!$this->exames->contains($exame)) {
+            $this->exames[] = $exame;
+            $exame->addAso($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExame(Exame $exame): self
+    {
+        if ($this->exames->removeElement($exame)) {
+            $exame->removeAso($this);
+        }
 
         return $this;
     }

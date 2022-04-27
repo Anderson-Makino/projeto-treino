@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ExameRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ExameRepository::class)]
@@ -34,6 +36,16 @@ class Exame
     #[ORM\ManyToOne(targetEntity: Medico::class, inversedBy: 'exame')]
     #[ORM\JoinColumn(nullable: false)]
     private $medico;
+
+    #[ORM\ManyToMany(targetEntity: Aso::class, inversedBy: 'exames')]
+    private $aso;
+
+    private $name = '';
+    
+    public function __construct()
+    {
+        $this->aso = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -122,5 +134,34 @@ class Exame
         $this->medico = $medico;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Aso>
+     */
+    public function getAso(): Collection
+    {
+        return $this->aso;
+    }
+
+    public function addAso(Aso $aso): self
+    {
+        if (!$this->aso->contains($aso)) {
+            $this->aso[] = $aso;
+        }
+
+        return $this;
+    }
+
+    public function removeAso(Aso $aso): self
+    {
+        $this->aso->removeElement($aso);
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

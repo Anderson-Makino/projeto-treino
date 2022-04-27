@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Aso;
+use App\Entity\Exame;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -34,18 +36,26 @@ class AsoType extends AbstractType
                 'choice_label'=>function($empresa) {
                     return $empresa->getId().' - '. $empresa->getNome();
                 }
-            ])->add('funcionario',null,[
+            ])
+            ->add('funcionario',null,[
                 'choice_label'=>function($funcionario) {
                     return $funcionario->getId().' - '. $funcionario->getNome();
                 }
-            ])->add('medico_aso',null,[
+            ])
+            ->add('medico_aso',null,[
                 'choice_label'=>function($medico) {
                     return $medico->getId().' - '. $medico->getNome();
                 }
-            ])->add('medico_pcmso',null,[
+            ])
+            ->add('medico_pcmso',null,[
                 'choice_label'=>function($medico) {
                     return $medico->getId().' - '. $medico->getNome();
                 }
+            ])
+            ->add('exames', CollectionType::class, [
+                'entry_type' => ExameType::class,
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
             ])
         ;
     }

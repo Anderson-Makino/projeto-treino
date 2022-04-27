@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Escritorio;
 use App\Entity\Usuario;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -59,10 +61,14 @@ class UsuarioType extends AbstractType
 
         if ($this->route != 'app_register')
         {
-            $form->add('office',null,[
-                'choice_label'=>function($company) {
-                    return $company->getNome();
-                }
+            $form->add('office', EntityType::class, [
+                'class' => Escritorio::class,
+                'multiple' => true,
+                'expanded' => true,
+                /*'choice_label'=>function($company) {
+                    return $company->getId(). '-' .$company->getNome();
+                },*/
+                'choice_label' => 'nome',
             ]);
         }
     }
