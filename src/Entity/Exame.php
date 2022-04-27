@@ -37,7 +37,7 @@ class Exame
     #[ORM\JoinColumn(nullable: false)]
     private $medico;
 
-    #[ORM\ManyToMany(targetEntity: Aso::class, inversedBy: 'exames', orphanRemoval:true)]
+    #[ORM\ManyToMany(targetEntity: Aso::class, inversedBy: 'exames')]
     private $aso;
 
     private $name = '';

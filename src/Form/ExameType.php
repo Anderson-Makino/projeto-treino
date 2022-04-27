@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Exame;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,7 +14,9 @@ class ExameType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('dtExm')
+            ->add('dtExm', DateType::class, [
+                'format' => 'dd MM yyyy',
+            ])
             ->add('procRealizado')
             ->add('observacao')
             ->add('ordemExm',ChoiceType::class,[
@@ -30,7 +33,9 @@ class ExameType extends AbstractType
                     '4 - Agravamento' => 'Agravamento',
                 ]
             ])
-            ->add('vencimento')
+            ->add('vencimento', DateType::class, [
+                'format' => 'dd MM yyyy',
+            ])
             ->add('medico', null,[
                 'choice_label' => function($medico) {
                     return $medico->getId(). '-' . $medico->getNome();

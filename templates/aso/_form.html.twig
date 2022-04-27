@@ -51,25 +51,24 @@
     {{ form_row(form.medico_aso) }}
     {{ form_row(form.medico_pcmso) }}
     <div class="js-exame-wrapper"
-    data-prototype="{{ form_widget(form.exames.vars.prototype)|e('html_attr') }}"
-    data-index="{{form.exames|length}}"
-    >
-    {% for exame in form.exames %}
-    <br>
-    <div class="js-exame-item">
-    <div class='this'>
-        <h3>Exame </h3>
-        <a href="#" class="js-remove-exame">
-            <i class="fa fa-trash"></i>
+        data-prototype="{{ form_widget(form.exames.vars.prototype)|e('html_attr') }}"
+        data-index="{{form.exames|length}}"
+        >
+        {% for exame in form.exames %}
+            <br>
+
+            <h3>Exame</h3>
+            <div class="js-exame-item">
+                <a href="#" class="js-remove-exame">
+                    <i class="fa fa-trash"></i>
+                </a>
+            {{ form_row(exame) }}
+            <br>
+            </div>
+        {% endfor %}
+        <a href="#" class="js-add-exame">
+            Add Exame
         </a>
-        </div>
-    {{ form_row(exame) }}
-    <br>
-    </div>
-    {% endfor %}
-    <a href="#" class="js-add-exame">
-        Add Exame
-    </a>
     </div>
     {{ form_rest(form) }}
     
