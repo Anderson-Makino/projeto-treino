@@ -1,6 +1,6 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btnbig">{{ button_label|default('Save') }}</button>
+    <button class="btn btn-primary">{{ button_label|default('Criar') }}</button>
 
-    <a class ="redirect_link btn btnbig" href="{{ path('app_empresa_index') }}">Retornar a Lista</a>
+    <a class =" btn btn btn-primary" href="{{ path('app_empresa_index') }}">Retornar a Lista</a>
 {{ form_end(form) }}

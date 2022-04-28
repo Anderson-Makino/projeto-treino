@@ -2,6 +2,7 @@
 
 {% block title %}Usuario{% endblock %}
 
+{% block logo_large %}<img style="border-radius:50%; padding-top:0px" src="https://pbs.twimg.com/profile_images/1500877006506012677/zOh3xtKr_400x400.png">{% endblock %}
 {% block navbar_messages %} {% endblock %}
 {% block navbar_notifications %} {% endblock %}
 {% block navbar_tasks %} {% endblock %}
@@ -15,7 +16,6 @@
 
 {% block page_content %}
 
-    <h1>Usuario</h1>
 
     <table class="table">
         <tbody>
@@ -52,7 +52,7 @@
             {% endif %}
         </tbody>
     </table>
-    <a class ="redirect_link btnbig" href="{{ path('app_usuario_edit', {'id': usuario.id}) }}">Editar</a>
+    <a class ="btn btn-primary" href="{{ path('app_usuario_edit', {'id': usuario.id}) }}">Editar</a>
 
     {{ include('usuario/_delete_form.html.twig') }}
 {% endblock %}

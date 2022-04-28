@@ -20,6 +20,9 @@
 
         $wrapper.on('click', '.js-add-exame', function(e) {
             e.preventDefault();
+            var y = document.createElement("H3");
+            var t = document.createTextNode("Exame");
+            y.appendChild(t);
                 // Get the data-prototype explained earlier
                 var prototype = $wrapper.data('prototype');
                 // get the new index
@@ -57,11 +60,13 @@
         {% for exame in form.exames %}
             <br>
 
-            <h3>Exame</h3>
+            <h3 id="heading-exame">Exame</h3>
             <div class="js-exame-item">
+            {% if app.request.attributes.get('_route') != 'app_aso_new' %}
                 <a href="#" class="js-remove-exame">
                     <i class="fa fa-trash"></i>
                 </a>
+            {% endif %}
             {{ form_row(exame) }}
             <br>
             </div>
@@ -72,6 +77,7 @@
     </div>
     {{ form_rest(form) }}
     
-    <button class="btnbig">{{ button_label|default('Save') }}</button>
-    <a class ="redirect_link btn btnbig" href="{{ path('app_aso_index') }}">back to list</a>
+    <button class="btn btn-primary">{{ button_label|default('Criar') }}</button>
+    <a class =" btn btn btn-primary" href="{{ path('app_aso_index') }}">Retornar a Lista</a>
 {{ form_end(form) }}
+</div>

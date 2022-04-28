@@ -1,20 +1,10 @@
-{% extends '@AdminLTE/layout/default-layout.html.twig' %}
+{% extends 'base-avanzu.html.twig' %}
 
 {% block title %}Aso{% endblock %}
 
-{% block navbar_messages %} {% endblock %}
-{% block navbar_notifications %} {% endblock %}
-{% block navbar_tasks %} {% endblock %}
-{% block navbar_user %} {% endblock %}
 {% block page_title %} ASO {% endblock %}
-{% block page_subtitle %} {% endblock %}
-
-{% block sidebar_nav %}
-{{ include('admin_navbar.html.twig') }}
-{% endblock %}
 
 {% block page_content %}
-    <h1>Aso index</h1>
 
     <table class="table">
         <thead>
@@ -23,7 +13,7 @@
                 <th>DtAso</th>
                 <th>Tipo</th>
                 <th>Resultado</th>
-                <th>actions</th>
+                <th>Editar</th>
             </tr>
         </thead>
         <tbody>
@@ -34,8 +24,7 @@
                 <td>{{ aso.tipo }}</td>
                 <td>{{ aso.resultado }}</td>
                 <td>
-                    <a class="btnsmall" href="{{ path('app_aso_show', {'id': aso.id}) }}">show</a>
-                    <a class="btnsmall" href="{{ path('app_aso_edit', {'id': aso.id}) }}">edit</a>
+                    <a class="btn btn-primary btn-sm" href="{{ path('app_aso_edit', {'id': aso.id}) }}">Editar</a>
                 </td>
             </tr>
         {% else %}
@@ -46,5 +35,5 @@
         </tbody>
     </table>
 
-    <a class ="redirect_link btn btnbig" href="{{ path('app_aso_new') }}">Create new</a>
+    <a class =" btn btn btn-primary" href="{{ path('app_aso_new') }}">Criar Novo</a>
 {% endblock %}

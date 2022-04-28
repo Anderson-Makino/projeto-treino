@@ -1,20 +1,10 @@
-{% extends '@AdminLTE/layout/default-layout.html.twig' %}
+{% extends 'base-avanzu.html.twig' %}
 
-{% block title %}New Aso{% endblock %}
+{% block title %}Novo Aso{% endblock %}
 
-{% block navbar_messages %} {% endblock %}
-{% block navbar_notifications %} {% endblock %}
-{% block navbar_tasks %} {% endblock %}
-{% block navbar_user %} {% endblock %}
 {% block page_title %} ASO {% endblock %}
-{% block page_subtitle %} {% endblock %}
-
-{% block sidebar_nav %}
-{{ include('admin_navbar.html.twig') }}
-{% endblock %}
 
 {% block page_content %}
-    <h1>Create new Aso</h1>
 
     {{ include('aso/_form.html.twig') }}
 {% endblock %}

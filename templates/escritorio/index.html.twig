@@ -1,17 +1,8 @@
-{% extends '@AdminLTE/layout/default-layout.html.twig' %}
+{% extends 'base-avanzu.html.twig' %}
 
 {% block title %}Escritorio{% endblock %}
 
-{% block navbar_messages %} {% endblock %}
-{% block navbar_notifications %} {% endblock %}
-{% block navbar_tasks %} {% endblock %}
-{% block navbar_user %} {% endblock %}
 {% block page_title %} Escritorio {% endblock %}
-{% block page_subtitle %} {% endblock %}
-
-{% block sidebar_nav %}
-{{ include('admin_navbar.html.twig') }}
-{% endblock %}
 
 {% block page_content %}
 
@@ -23,7 +14,7 @@
                 <th>Telefone</th>
                 <th>Descricao</th>
                 <th>CNPJ</th>
-                <th>actions</th>
+                <th>Editar</th>
             </tr>
         </thead>
         <tbody>
@@ -35,8 +26,7 @@
                 <td>{{ escritorio.descricao }}</td>
                 <td>{{ escritorio.cnpj }} </td>
                 <td>
-                    <a class="btnsmall" href="{{ path('app_escritorio_show', {'id': escritorio.id}) }}">Mostrar</a>
-                    <a class="btnsmall" href="{{ path('app_escritorio_edit', {'id': escritorio.id}) }}">Editar</a>
+                    <a class="btn btn-primary btn-sm" href="{{ path('app_escritorio_edit', {'id': escritorio.id}) }}">Editar</a>
                 </td>
             </tr>
         {% else %}
@@ -47,5 +37,5 @@
         </tbody>
     </table>
 
-    <a class ="redirect_link btn btnbig" href="{{ path('app_escritorio_new') }}">Criar Novo</a>
+    <a class =" btn btn btn-primary" href="{{ path('app_escritorio_new') }}">Criar Novo</a>
 {% endblock %}

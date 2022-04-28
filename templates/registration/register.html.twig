@@ -1,6 +1,8 @@
-{% extends '@AdminLTE/layout/default-layout.html.twig' %}
-{% block title %}Registrar novo usuario{% endblock %}
+{% extends 'base-avanzu.html.twig' %}
+{% block title %}Registrar{% endblock %}
 
+{% block page_title %} Registrar novo usuario {% endblock %}
+{% block page_subtitle %} Registro {% endblock %}
 
 {% block page_content %}
 
@@ -16,11 +18,11 @@
             label: 'Password'
         }) }}
 
-        <button type="submit" class="btnbig">Register</button>
+        <button type="submit" class="btn btn-primary">Registrar</button>
         {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('app_usuario_index') }}">Retornar a tela de usuarios</a>
+            <a class="btn btn-primary" href="{{ path('app_usuario_index') }}">Retornar a tela de usuarios</a>
         {% else %}
-            <a href="{{ path('app_login') }}">Retornar a tela de login</a>
+            <a class="btn btn-primary" href="{{ path('app_login') }}">Retornar a tela de login</a>
         {% endif %}
     {{ form_end(registrationForm) }}
 {% endblock %}

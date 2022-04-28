@@ -1,21 +1,11 @@
-{% extends '@AdminLTE/layout/default-layout.html.twig' %}
+{% extends 'base-avanzu.html.twig' %}
 
-{% block title %}New Empresa{% endblock %}
+{% block title %}Novo Empresa{% endblock %}
 
-{% block navbar_messages %} {% endblock %}
-{% block navbar_notifications %} {% endblock %}
-{% block navbar_tasks %} {% endblock %}
-{% block navbar_user %} {% endblock %}
 {% block page_title %} Empresa {% endblock %}
-{% block page_subtitle %} {% endblock %}
-
-{% block sidebar_nav %}
-{{ include('admin_navbar.html.twig') }}
-{% endblock %}
 
 {% block page_content %}
 
-    <h1>Create new Empresa</h1>
 
     {{ include('empresa/_form.html.twig') }}
 {% endblock %}

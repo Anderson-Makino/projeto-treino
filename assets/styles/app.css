@@ -38,7 +38,7 @@ tr:nth-child(even) {
     border-radius: 8px;
   }
   
-  .btn:hover, .btnsmall:hover {
+ /* .btn:hover, .btnsmall:hover {
       background-color: #313131;
       color: #fff;
     }
@@ -49,4 +49,4 @@ tr:nth-child(even) {
     color: #fff;
     transform: translateY(4px);
   }
-  
+  */

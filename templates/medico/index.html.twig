@@ -1,21 +1,11 @@
-{% extends '@AdminLTE/layout/default-layout.html.twig' %}
+{% extends 'base-avanzu.html.twig' %}
 
 {% block title %}Medico{% endblock %}
 
-{% block navbar_messages %} {% endblock %}
-{% block navbar_notifications %} {% endblock %}
-{% block navbar_tasks %} {% endblock %}
-{% block navbar_user %} {% endblock %}
 {% block page_title %} Medico {% endblock %}
-{% block page_subtitle %} {% endblock %}
-
-{% block sidebar_nav %}
-{{ include('admin_navbar.html.twig') }}
-{% endblock %}
 
 {% block page_content %}
 
-    <h1>Medico</h1>
 
     <table class="table">
         <thead>
@@ -24,7 +14,7 @@
                 <th>Nome</th>
                 <th>Crm</th>
                 <th>Telefone</th>
-                <th>actions</th>
+                <th>Editar</th>
             </tr>
         </thead>
         <tbody>
@@ -35,8 +25,7 @@
                 <td>{{ medico.crm }}</td>
                 <td>{{ medico.phone }}</td>
                 <td>
-                    <a class="btnsmall" href="{{ path('app_medico_show', {'id': medico.id}) }}">Mostrar</a>
-                    <a class="btnsmall" href="{{ path('app_medico_edit', {'id': medico.id}) }}">Editar</a>
+                    <a class="btn btn-primary btn-sm" href="{{ path('app_medico_edit', {'id': medico.id}) }}">Editar</a>
                 </td>
             </tr>
         {% else %}
@@ -47,5 +36,5 @@
         </tbody>
     </table>
 
-    <a class ="redirect_link btn btnbig" href="{{ path('app_medico_new') }}">Criar Novo</a>
+    <a class =" btn btn btn-primary" href="{{ path('app_medico_new') }}">Criar Novo</a>
 {% endblock %}

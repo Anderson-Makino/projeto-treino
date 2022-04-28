@@ -1,20 +1,9 @@
-{% extends '@AdminLTE/layout/default-layout.html.twig' %}
+{% extends 'base-avanzu.html.twig' %}
 
 {% block title %}Usuarios{% endblock %}
 
-{#{% block logo_path %}
-    <a href="{{path('app_usuario_index')}}"> </a>
-{% endblock %}#}
-{% block navbar_messages %} {% endblock %}
-{% block navbar_notifications %} {% endblock %}
-{% block navbar_tasks %} {% endblock %}
-{% block navbar_user %} {% endblock %}
-{% block page_title %} Usuario {% endblock %}
-{% block page_subtitle %} {% endblock %}
 
-{% block sidebar_nav %}
-{{ include('admin_navbar.html.twig') }}
-{% endblock %}
+{% block page_title %} Usuario {% endblock %}
 
 {% block page_content %}
 
@@ -26,7 +15,7 @@
                 <th>Email</th>
                 <th>Roles</th>
                 {#<th>Password</th>#}
-                <th>actions</th>
+                <th>Editar</th>
             </tr>
         </thead>
         <tbody>
@@ -43,8 +32,7 @@
 
                 {#<td>{{ usuario.password }}</td>#}
                 <td>
-                    <a class="btnsmall" href="{{ path('app_usuario_show', {'id': usuario.id}) }}">Mostrar</a>
-                    <a class="btnsmall" href="{{ path('app_usuario_edit', {'id': usuario.id}) }}">Editar</a>
+                    <a class="btn btn-primary btn-sm" href="{{ path('app_usuario_edit', {'id': usuario.id}) }}">Editar</a>
                 </td>
             </tr>
         {% else %}
@@ -54,5 +42,5 @@
         {% endfor %}
         </tbody>
     </table>
-    <a class="redirect_link btnbig" href="{{ path('app_register') }}">Criar Novo</a>
+    <a class="btn btn-primary" href="{{ path('app_register') }}">Criar Novo</a>
 {% endblock %}

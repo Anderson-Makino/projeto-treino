@@ -38,6 +38,7 @@ class AsoController extends AbstractController
         {
             if ($form['medico_aso']->getData() != $form['medico_pcmso']->getData())
             {
+                $exame->addAso($aso);
                 $asoRepository->add($aso);
                 $exameRepository->add($exame);
                 return $this->redirectToRoute('app_aso_index', [], Response::HTTP_SEE_OTHER);

@@ -1,8 +1,12 @@
-{% extends '@AdminLTE/layout/default-layout-avanzu.html.twig' %}
+{% extends '@AdminLTE/layout/default-layout.html.twig' %}
 
-{% block avanzu_page_title %}Demo application{% endblock %}
+{% block logo_large %}<img style="border-radius:50%; padding-top:0px" src="{{ asset('build/images/sibrax_logo.png') }}">{% endblock %}
+{% block navbar_messages %} {% endblock %}
+{% block navbar_notifications %} {% endblock %}
+{% block navbar_tasks %} {% endblock %}
+{% block navbar_user %} {% endblock %}
+{% block page_subtitle %} {% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    {% include 'includes/javascript.html.twig' %}
+{% block sidebar_nav %}
+{{ include('admin_navbar.html.twig') }}
 {% endblock %}
