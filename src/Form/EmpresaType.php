@@ -15,7 +15,9 @@ class EmpresaType extends AbstractType
         $builder
             ->add('nome')
             ->add('cep')
-            ->add('endereco')
+            ->add('endereco', null, [
+                'label' => 'Endereço',
+            ])
             ->add('numero')
             ->add('complemento')
             ->add('bairro')
@@ -27,13 +29,20 @@ class EmpresaType extends AbstractType
                     'PA' => 'Paraiba', 'PB' => 'Paraíba', 'PR' => 'Parana', 'PE' => 'Pernambuco', 'PI' => 'Piauí', 'RJ' => 'Rio de Janeiro', 
                     'RN' => 'Rio Grande do Norte', 'RS' => 'Rio Grande do Sul', 'RO' => 'Rondônia', 'RR' => 'Roraima', 'SC' => 'Santa Catarina', 'SP' => 'São Paulo', 
                     'SE' => 'Sergipe', 'TO' => 'Tocantins'
-                ]
+                ],
+                'label' => 'UF',
             ])
-            ->add('phone')
+            ->add('phone', null, [
+                'label' => 'Telefone',
+            ])
             ->add('celular')
-            ->add('descricao')
+            ->add('descricao', null, [
+                'label' => 'Descrição',
+            ])
             ->add('email')
-            ->add('cpf_responsavel')
+            ->add('cpf_responsavel', null, [
+                'label' => 'CPF do Responsavel',
+            ])
         ;
     }
 

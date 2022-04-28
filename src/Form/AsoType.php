@@ -18,6 +18,7 @@ class AsoType extends AbstractType
         $builder
             ->add('dtAso', DateType::class, [
                 'format' => 'dd MM yyyy',
+                'label' => 'Data do ASO',
             ])
             ->add('tipo',ChoiceType::class,[
                 'choices'=> [
@@ -27,7 +28,8 @@ class AsoType extends AbstractType
                     '3 - Exame médico de mudança de função' => 'Exame médico de mudança de função',
                     '4 - Exame médico de monitoração pontual' => 'Exame médico de monitoração pontual',
                     '9 - Exame médico demissional' => 'Exame médico demissional',
-                ]
+                ],
+                'label' => 'Tipo do Exame',
             ])
             ->add('resultado',ChoiceType::class,[
                 'choices'=> [
@@ -38,22 +40,26 @@ class AsoType extends AbstractType
             ->add('empresa',null,[
                 'choice_label'=>function($empresa) {
                     return $empresa->getId().' - '. $empresa->getNome();
-                }
+                },
+                'label' => 'Empresa Assoaciada',
             ])
             ->add('funcionario',null,[
                 'choice_label'=>function($funcionario) {
                     return $funcionario->getId().' - '. $funcionario->getNome();
-                }
+                },
+                'label' => 'Funcionario Associado',
             ])
             ->add('medico_aso',null,[
                 'choice_label'=>function($medico) {
                     return $medico->getId().' - '. $medico->getNome();
-                }
+                },
+                'label' => 'Medico Avaliado',
             ])
             ->add('medico_pcmso',null,[
                 'choice_label'=>function($medico) {
                     return $medico->getId().' - '. $medico->getNome();
-                }
+                },
+                'label' => 'Medico Responsavel',
             ])
             ->add('exames', CollectionType::class, [
                 'entry_type' => ExameType::class,

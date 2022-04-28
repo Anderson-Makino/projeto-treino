@@ -15,13 +15,23 @@ class FuncionarioType extends AbstractType
         $builder
             ->add('nome')
             ->add('email')
-            ->add('phone')
+            ->add('phone', null, [
+                'label' => 'Telefone',
+            ])
             ->add('celular')
-            ->add('salario')
-            ->add('cpf')
-            ->add('caepf')
+            ->add('salario', null, [
+                'label' => 'Salário',
+            ])
+            ->add('cpf', null, [
+                'label' => 'CPF',
+            ])
+            ->add('caepf', null, [
+                'label' => 'CAEPF',
+            ])
             ->add('cep')
-            ->add('endereco')
+            ->add('endereco', null, [
+                'label' => 'Endereço',
+            ])
             ->add('numero')
             ->add('complemento')
             ->add('bairro')
@@ -33,14 +43,18 @@ class FuncionarioType extends AbstractType
                     'PA' => 'Paraiba', 'PB' => 'Paraíba', 'PR' => 'Parana', 'PE' => 'Pernambuco', 'PI' => 'Piauí', 'RJ' => 'Rio de Janeiro', 
                     'RN' => 'Rio Grande do Norte', 'RS' => 'Rio Grande do Sul', 'RO' => 'Rondônia', 'RR' => 'Roraima', 'SC' => 'Santa Catarina', 'SP' => 'São Paulo', 
                     'SE' => 'Sergipe', 'TO' => 'Tocantins'
-                ]
+                ],
+                'label' => 'UF',
             ])
-            ->add('matricula')
+            ->add('matricula', null, [
+                'label' => 'Matrícula',
+            ])
             ->add('categoria')
             ->add('company_id',null,[
                 'choice_label'=>function($company) {
                     return $company->getId().' - '. $company->getNome();
-                }
+                },
+                'label' => 'Empresa Associada',
             ])
         ;
     }

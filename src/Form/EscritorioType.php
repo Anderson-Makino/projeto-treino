@@ -39,13 +39,20 @@ class EscritorioType extends AbstractType
                         'max' => 14,
                     ]),
                 ],
+                'label' => 'CNPJ',
             ])
 
-            ->add('phone')
+            ->add('phone', null, [
+                'label' => 'Telefone',
+            ])
             ->add('celular')
-            ->add('descricao')
+            ->add('descricao', null, [
+                'label' => 'Descrição',
+            ])
             ->add('cep')
-            ->add('endereco')
+            ->add('endereco', null, [
+                'label' => 'Endereço',
+            ])
             ->add('numero')
             ->add('complemento')
             ->add('bairro')
@@ -57,12 +64,14 @@ class EscritorioType extends AbstractType
                     'PA' => 'Paraiba', 'PB' => 'Paraíba', 'PR' => 'Parana', 'PE' => 'Pernambuco', 'PI' => 'Piauí', 'RJ' => 'Rio de Janeiro', 
                     'RN' => 'Rio Grande do Norte', 'RS' => 'Rio Grande do Sul', 'RO' => 'Rondônia', 'RR' => 'Roraima', 'SC' => 'Santa Catarina', 'SP' => 'São Paulo', 
                     'SE' => 'Sergipe', 'TO' => 'Tocantins'
-                ]
+                ],
+                'label' => 'UF',
             ])
             ->add('office_company',null,[
                 'choice_label'=>function($company) {
                     return $company->getId().' - '. $company->getNome();
-                }
+                },
+                'label' => 'Empresa Associada',
             ])
             ;
     }

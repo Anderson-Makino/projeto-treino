@@ -15,12 +15,20 @@ class MedicoType extends AbstractType
         $builder
             ->add('nome')
             ->add('email')
-            ->add('crm')
-            ->add('cpf')
-            ->add('phone')
+            ->add('crm', null, [
+                'label' => 'CRM'
+            ])
+            ->add('cpf', null, [
+                'label' => 'CPF',
+            ])
+            ->add('phone', null, [
+                'label' => 'Telefone'
+            ])
             ->add('celular')
             ->add('cep')
-            ->add('endereco')
+            ->add('endereco', null, [
+                'label' => 'Endereço'
+            ])
             ->add('numero')
             ->add('complemento')
             ->add('bairro')
@@ -32,12 +40,15 @@ class MedicoType extends AbstractType
                     'PA' => 'Paraiba', 'PB' => 'Paraíba', 'PR' => 'Parana', 'PE' => 'Pernambuco', 'PI' => 'Piauí', 'RJ' => 'Rio de Janeiro', 
                     'RN' => 'Rio Grande do Norte', 'RS' => 'Rio Grande do Sul', 'RO' => 'Rondônia', 'RR' => 'Roraima', 'SC' => 'Santa Catarina', 'SP' => 'São Paulo', 
                     'SE' => 'Sergipe', 'TO' => 'Tocantins'
-                ]
+                ],
+                'label' => 'UF',
             ])
-            ->add('company_id',null,[
-                'choice_label'=>function($company) {
-                    return $company->getId().' - '. $company->getNome();
-                }
+            ->add('escritorio',null,[
+                'choice_label'=>function($escritorio) {
+                    return $escritorio->getId().' - '. $escritorio->getNome();
+                },
+                'label' => 'Escritorio Associado',
+                'expanded' => true,
             ])
         ;
     }

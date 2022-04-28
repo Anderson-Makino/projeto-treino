@@ -24,12 +24,6 @@ class Medico
     #[ORM\Column(type: 'decimal', precision: 11, scale: 0, nullable: true)]
     private $phone;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
-    private $company;
-
-    #[ORM\ManyToOne(targetEntity: Empresa::class, inversedBy: 'medico_id')]
-    private $company_id;
-
     private $name = '';
 
     #[ORM\Column(type: 'string', length: 11)]
@@ -67,6 +61,9 @@ class Medico
 
     #[ORM\OneToMany(mappedBy: 'medico_aso', targetEntity: Aso::class)]
     private $asos;
+
+    #[ORM\ManyToOne(targetEntity: Escritorio::class, inversedBy: 'medicos')]
+    private $escritorio;
 
     public function __construct()
     {
@@ -111,30 +108,6 @@ class Medico
     public function setPhone(?string $phone): self
     {
         $this->phone = $phone;
-
-        return $this;
-    }
-
-    public function getCompany(): ?int
-    {
-        return $this->company;
-    }
-
-    public function setCompany(int $company): self
-    {
-        $this->company = $company;
-
-        return $this;
-    }
-
-    public function getCompanyId(): ?Empresa
-    {
-        return $this->company_id;
-    }
-
-    public function setCompanyId(?Empresa $company_id): self
-    {
-        $this->company_id = $company_id;
 
         return $this;
     }
@@ -320,6 +293,18 @@ class Medico
                 $aso->setMedicoAso(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEscritorio(): ?Escritorio
+    {
+        return $this->escritorio;
+    }
+
+    public function setEscritorio(?Escritorio $escritorio): self
+    {
+        $this->escritorio = $escritorio;
 
         return $this;
     }

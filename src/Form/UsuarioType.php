@@ -30,9 +30,13 @@ class UsuarioType extends AbstractType
     {
         $builder
 
-            ->add('username')
+            ->add('username', null, [
+                'label' => 'Nome de Usuario',
+            ])
             ->add('email')
-            ->add('password')
+            ->add('password', null, [
+                'label' => 'Senha',
+            ])
         ;
         $builder->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'onPreSetData']);
     }

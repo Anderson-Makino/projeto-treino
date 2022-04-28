@@ -16,14 +16,20 @@ class ExameType extends AbstractType
         $builder
             ->add('dtExm', DateType::class, [
                 'format' => 'dd MM yyyy',
+                'label' => 'Data do Exame',
+            ],)
+            ->add('procRealizado', null, [
+                'label' => 'Procedimento Realizado',
             ])
-            ->add('procRealizado')
-            ->add('observacao')
+            ->add('observacao', null, [
+                'label' => 'Observação',
+            ])
             ->add('ordemExm',ChoiceType::class,[
                 'choices'=> [
                     '1 - Inicial' => 'Inicial',
                     '2 - Sequencial' => 'Sequencial',
-                ]
+                ],
+                'label' => 'Ordem do Exame',
             ])
             ->add('resultado',ChoiceType::class,[
                 'choices'=> [
