@@ -33,9 +33,6 @@ class Empresa
     #[ORM\OneToMany(mappedBy: 'office_company', targetEntity: Escritorio::class)]
     private $company_office;
 
-    #[ORM\OneToMany(mappedBy: 'company_id', targetEntity: Medico::class)]
-    private $medico_id;
-
     #[ORM\OneToMany(mappedBy: 'company_id', targetEntity: Funcionario::class)]
     private $funcionario_id;
 

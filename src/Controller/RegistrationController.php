@@ -21,6 +21,7 @@ class RegistrationController extends AbstractController
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, LoginFromAuthenticator $authenticator, EntityManagerInterface $entityManager, EscritorioRepository $escritorioRepository): Response
     {
+
         $user = new Usuario();
         $escritorio = new Escritorio();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -54,11 +55,12 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             // do anything else you need here, like send an email
 
-            return $userAuthenticator->authenticateUser(
-                $user,
-                $authenticator,
-                $request
-            );
+            // return $userAuthenticator->authenticateUser(
+            //     $user,
+            //     $authenticator,
+            //     $request
+            // );
+            return $this->redirectToRoute('app_usuario_index', [], Response::HTTP_SEE_OTHER); 
         }
 
         return $this->render('registration/register.html.twig', [

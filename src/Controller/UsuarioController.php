@@ -10,15 +10,25 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Security;
 
 #[Route('/usuario')]
 class UsuarioController extends AbstractController
 {
+
+    public function __construct(Security $security)
+    {
+       $this->security = $security;
+    }
+
     #[Route('/', name: 'app_usuario_index', methods: ['GET'])]
     public function index(UsuarioRepository $usuarioRepository): Response
     {
+        $userLogged = new Usuario;
+        $userLogged = $this->security->getUser();
         return $this->render('usuario/index.html.twig', [
-            'usuarios' => $usuarioRepository->findAll(),
+            //'usuarios' => $usuarioRepository->findBy(array('office' => array($userLogged->getOffice()))),
+            'usuarios' => $usuarioRepository->findBy(array('id' => $userLogged->getId())),
         ]);
     }
 
