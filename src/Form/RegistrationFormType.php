@@ -58,12 +58,8 @@ class RegistrationFormType extends AbstractType
                     new NotBlank([
                         'message' => 'Please enter a CNPJ',
                     ]),
-                    new Length([
-                        'min' => 14,
-                        'minMessage' => 'CNPJ have 14 digits',
-                        'max' => 14,
-                    ]),
                 ],
+                'attr' => ['minlength' => 14 , 'maxlength' => 14],
                 'mapped' => false,
                 'label' => 'CNPJ',
             ],

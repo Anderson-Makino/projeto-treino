@@ -175,36 +175,6 @@ class Empresa
     }
 
     /**
-     * @return Collection<int, Medico>
-     */
-    public function getMedicoId(): Collection
-    {
-        return $this->medico_id;
-    }
-
-    public function addMedicoId(Medico $medicoId): self
-    {
-        if (!$this->medico_id->contains($medicoId)) {
-            $this->medico_id[] = $medicoId;
-            $medicoId->setCompanyId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMedicoId(Medico $medicoId): self
-    {
-        if ($this->medico_id->removeElement($medicoId)) {
-            // set the owning side to null (unless already changed)
-            if ($medicoId->getCompanyId() === $this) {
-                $medicoId->setCompanyId(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Funcionario>
      */
     public function getFuncionarioId(): Collection

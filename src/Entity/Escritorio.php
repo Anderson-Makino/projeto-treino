@@ -18,7 +18,7 @@ class Escritorio
     #[ORM\Column(type: 'string', length: 200)]
     private $nome;
 
-    #[ORM\Column(type: 'string', length: 200)]
+    #[ORM\Column(type: 'string', length: 200, nullable: true)]
     private $endereco;
 
     #[ORM\Column(type: 'decimal', precision: 11, scale: 0, nullable: true)]
@@ -31,7 +31,7 @@ class Escritorio
     private $user_office;
 
     #[ORM\ManyToOne(targetEntity: Empresa::class, inversedBy: 'company_office')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $office_company;
 
     private $name = '';
@@ -39,28 +39,28 @@ class Escritorio
     #[ORM\Column(type: 'string', length: 14)]
     private $cnpj;
 
-    #[ORM\Column(type: 'string', length: 8)]
+    #[ORM\Column(type: 'string', length: 8, nullable: true)]
     private $cep;
 
-    #[ORM\Column(type: 'string', length: 4)]
+    #[ORM\Column(type: 'string', length: 4, nullable: true)]
     private $numero;
 
     #[ORM\Column(type: 'text', nullable: true)]
     private $complemento;
 
-    #[ORM\Column(type: 'string', length: 200)]
+    #[ORM\Column(type: 'string', length: 200, nullable: true)]
     private $bairro;
 
-    #[ORM\Column(type: 'string', length: 100)]
+    #[ORM\Column(type: 'string', length: 100, nullable: true)]
     private $cidade;
 
-    #[ORM\Column(type: 'string', length: 50)]
+    #[ORM\Column(type: 'string', length: 50, nullable: true)]
     private $uf;
 
     #[ORM\Column(type: 'string', length: 11, nullable: true)]
     private $celular;
 
-    #[ORM\Column(type: 'string', length: 200)]
+    #[ORM\Column(type: 'string', length: 200, nullable: true)]
     private $email;
 
     #[ORM\OneToMany(mappedBy: 'escritorio', targetEntity: Medico::class)]

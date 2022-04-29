@@ -22,6 +22,7 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, LoginFromAuthenticator $authenticator, EntityManagerInterface $entityManager, EscritorioRepository $escritorioRepository): Response
     {
         $user = new Usuario();
+        $escritorio = new Escritorio();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -36,8 +37,18 @@ class RegistrationController extends AbstractController
 
             $cnpj = $form->get('cnpj')->getData();
             $nome_escritorio = $form->get('nome')->getData();
-            $office = $escritorioRepository->findOneBy(array('cnpj' => $cnpj, 'nome' => $nome_escritorio));
-            $user->addOffice($office);
+            if ($escritorioRepository->findOneBy(array('cnpj' => $cnpj, 'nome' => $nome_escritorio)) == null )
+            {
+                $escritorio->setCnpj($cnpj);
+                $escritorio->setNome($nome_escritorio);
+                $escritorioRepository->add($escritorio);
+                $user->addOffice($escritorio);
+            }
+            else
+            {
+                $escritorio = $escritorioRepository->findOneBy(array('cnpj' => $cnpj, 'nome' => $nome_escritorio));
+                $user->addOffice($escritorio);
+            }
 
             $entityManager->persist($user);
             $entityManager->flush();
