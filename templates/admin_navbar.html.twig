@@ -9,80 +9,83 @@
         {% endblock %}
 </head>
 
-<nav class="mt-2">
-    <ul class="nav-sidebar" data-widget="treeview" role="menu">
-        <li class="nav-item has-treeview menu-open">
-            <a href="{{ path('app_usuario_index')}}" class="nav-link">
-                <p>
-                <i class="fa fa-user"></i>
-                Usuarios
-                </p>
-            </a>
-        </li>
 
-        <li class="nav-item has-treeview menu-open">
-            <a href="{{ path('app_escritorio_index')}}" class="nav-link">
-                <p>
-                <i class="fa fa-building"></i>
-                Escritorio
-                </p>
-            </a>
-        </li>
+{% if  app.request.attributes.get('_route') != 'app_register' %}
+    <nav class="mt-2">
+        <ul class="nav-sidebar" data-widget="treeview" role="menu">
+            <li class="nav-item has-treeview menu-open">
+                <a href="{{ path('app_usuario_index')}}" class="nav-link">
+                    <p>
+                    <i class="fa fa-user"></i>
+                    Usuarios
+                    </p>
+                </a>
+            </li>
 
-        <li class="nav-item has-treeview menu-open">
-            <a href="{{ path('app_empresa_index')}}" class="nav-link">
-                <p>
-                <i class="fa fa-briefcase"></i>
-                Empresa
-                </p>
-            </a>
-        </li>
+            <li class="nav-item has-treeview menu-open">
+                <a href="{{ path('app_escritorio_index')}}" class="nav-link">
+                    <p>
+                    <i class="fa fa-building"></i>
+                    Escritorio
+                    </p>
+                </a>
+            </li>
 
-        <li class="nav-item has-treeview menu-open">
-            <a href="{{ path('app_medico_index')}}" class="nav-link">
-                <p>
-                <i class="fa fa-heart"></i>
-                Medicos
-                </p>
-            </a>
-        </li>
+            <li class="nav-item has-treeview menu-open">
+                <a href="{{ path('app_empresa_index')}}" class="nav-link">
+                    <p>
+                    <i class="fa fa-briefcase"></i>
+                    Empresa
+                    </p>
+                </a>
+            </li>
 
-        <li class="nav-item has-treeview menu-open">
-            <a href="{{ path('app_funcionario_index')}}" class="nav-link">
-                <p>
-                <i class="fa fa-address-card"></i>
-                Funcionarios
-                </p>
-            </a>
-        </li>
+            <li class="nav-item has-treeview menu-open">
+                <a href="{{ path('app_medico_index')}}" class="nav-link">
+                    <p>
+                    <i class="fa fa-heart"></i>
+                    Medicos
+                    </p>
+                </a>
+            </li>
 
-        <li class="nav-item has-treeview menu-open">
-            <a href="{{ path('app_exame_index')}}" class="nav-link">
-                <p>
-                <i class="fa fa-briefcase-medical"></i>
-                Exames
-                </p>
-            </a>
-        </li>
+            <li class="nav-item has-treeview menu-open">
+                <a href="{{ path('app_funcionario_index')}}" class="nav-link">
+                    <p>
+                    <i class="fa fa-address-card"></i>
+                    Funcionarios
+                    </p>
+                </a>
+            </li>
 
-        <li class="nav-item has-treeview menu-open">
-            <a href="{{ path('app_aso_index')}}" class="nav-link">
-                <p>
-                <i class="fa fa-notes-medical"></i>
-                ASO
-                </p>
-            </a>
-        </li>
+            <li class="nav-item has-treeview menu-open">
+                <a href="{{ path('app_exame_index')}}" class="nav-link">
+                    <p>
+                    <i class="fa fa-briefcase-medical"></i>
+                    Exames
+                    </p>
+                </a>
+            </li>
 
-        {% if is_granted("IS_AUTHENTICATED_FULLY") %}
-        <li class="nav-item has-treeview menu-open">
-            <a href="{{ path('app_logout') }}" class="nav-link">
-                <p>
-                <i class="fas fa-sign-out-alt"></i>
-                Logout
-                </p>
-            </a>
-        </li>
-        {% endif %}
-    </ul>
-</nav>
+            <li class="nav-item has-treeview menu-open">
+                <a href="{{ path('app_aso_index')}}" class="nav-link">
+                    <p>
+                    <i class="fa fa-notes-medical"></i>
+                    ASO
+                    </p>
+                </a>
+            </li>
+
+            {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+            <li class="nav-item has-treeview menu-open">
+                <a href="{{ path('app_logout') }}" class="nav-link">
+                    <p>
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                    </p>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}
