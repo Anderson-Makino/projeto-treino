@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Usuario;
+use App\Entity\Escritorio;
+use App\Entity\Medico;
 use App\Entity\Exame;
 use App\Form\ExameType;
 use App\Repository\ExameRepository;
@@ -10,16 +13,30 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 #[Route('/exame')]
 class ExameController extends AbstractController
 {
+
+    public function __construct(Security $security)
+    {
+       $this->security = $security;
+    }
+
     #[Route('/', name: 'app_exame_index', methods: ['GET'])]
     public function index(ExameRepository $exameRepository, MedicoRepository $medicoRepository): Response
     {
+        $userLogged = new Usuario;
+        $escritorio = new Escritorio;
+        $medico = new Medico;
+        $userLogged = $this->security->getUser();
+        $escritorio = $userLogged->getOffice();
+        $medico = $medicoRepository->findByEscritorio($escritorio);
         return $this->render('exame/index.html.twig', [
-            'exames' => $exameRepository->findAll(),
-            'medico' => $medicoRepository->findAll(),
+            //'exames' => $exameRepository->findAll(),
+            //'medico' => $medicoRepository->findAll(),
+            'exames' => $exameRepository->findByMedico($medico),
         ]);
     }
 

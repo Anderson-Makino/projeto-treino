@@ -45,6 +45,17 @@ class MedicoRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function findByEscritorio($escritorio)
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.escritorio in (:escritorio)')
+            ->setParameters(array('escritorio' => $escritorio))
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Medico[] Returns an array of Medico objects
     //  */

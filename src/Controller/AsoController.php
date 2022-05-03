@@ -2,25 +2,43 @@
 
 namespace App\Controller;
 
+use App\Entity\Usuario;
+use App\Entity\Escritorio;
+use App\Entity\Empresa;
 use App\Entity\Aso;
 use App\Entity\Exame;
 use App\Form\AsoType;
 use App\Form\ExameType;
 use App\Repository\AsoRepository;
+use App\Repository\EmpresaRepository;
 use App\Repository\ExameRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 #[Route('/aso')]
 class AsoController extends AbstractController
 {
-    #[Route('/', name: 'app_aso_index', methods: ['GET'])]
-    public function index(AsoRepository $asoRepository): Response
+
+    public function __construct(Security $security)
     {
+       $this->security = $security;
+    }
+
+    #[Route('/', name: 'app_aso_index', methods: ['GET'])]
+    public function index(AsoRepository $asoRepository, EmpresaRepository $empresaRepository): Response
+    {
+        $userLogged = new Usuario;
+        $escritorio = new Escritorio;
+        $empresa = new Empresa;
+        $userLogged = $this->security->getUser();
+        $escritorio = $userLogged->getOffice();
+        $empresa = $empresaRepository->findByEscritorio($escritorio);
         return $this->render('aso/index.html.twig', [
-            'asos' => $asoRepository->findAll(),
+            //'asos' => $asoRepository->findAll(),
+            'asos' => $asoRepository->findByEmpresa($empresa),
 
         ]);
     }

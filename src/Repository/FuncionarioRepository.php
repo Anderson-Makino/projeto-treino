@@ -45,6 +45,16 @@ class FuncionarioRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByEmpresa($empresa)
+    {
+        return $this->createQueryBuilder('f')
+            ->andWhere('f.company_id in (:empresa)')
+            ->setParameters(array('empresa' => $empresa))
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Funcionario[] Returns an array of Funcionario objects
     //  */

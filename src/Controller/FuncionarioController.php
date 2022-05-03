@@ -2,23 +2,40 @@
 
 namespace App\Controller;
 
+use App\Entity\Usuario;
+use App\Entity\Escritorio;
 use App\Entity\Empresa;
 use App\Entity\Funcionario;
 use App\Form\FuncionarioType;
+use App\Repository\EmpresaRepository;
 use App\Repository\FuncionarioRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 #[Route('/funcionario')]
 class FuncionarioController extends AbstractController
 {
-    #[Route('/', name: 'app_funcionario_index', methods: ['GET'])]
-    public function index(FuncionarioRepository $funcionarioRepository): Response
+
+    public function __construct(Security $security)
     {
+       $this->security = $security;
+    }
+
+    #[Route('/', name: 'app_funcionario_index', methods: ['GET'])]
+    public function index(FuncionarioRepository $funcionarioRepository, EmpresaRepository $empresaRepository): Response
+    {
+        $userLogged = new Usuario;
+        $escritorio = new Escritorio;
+        $empresa = new Empresa;
+        $userLogged = $this->security->getUser();
+        $escritorio = $userLogged->getOffice();
+        $empresa = $empresaRepository->findByEscritorio($escritorio);
         return $this->render('funcionario/index.html.twig', [
-            'funcionarios' => $funcionarioRepository->findAll(),
+            //'funcionarios' => $funcionarioRepository->findAll(),
+            'funcionarios' => $funcionarioRepository->findByEmpresa($empresa),
         ]);
     }
 

@@ -67,8 +67,6 @@ class UsuarioRepository extends ServiceEntityRepository implements PasswordUpgra
      */
     public function findByEscritorio($escritorio)
     {
-
-        //SELECT distinct usuario_id FROM projetoTreino.usuario_escritorio JOIN projetoTreino.usuario WHERE escritorio_id = '?';
         return $this->createQueryBuilder('u')
             ->andWhere(':escritorio MEMBER OF u.office')
             ->setParameters(array('escritorio' => $escritorio))

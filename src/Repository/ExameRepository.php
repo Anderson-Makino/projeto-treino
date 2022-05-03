@@ -45,6 +45,16 @@ class ExameRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByMedico($medico)
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.medico in (:medico)')
+            ->setParameters(array('medico' => $medico))
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Exame[] Returns an array of Exame objects
     //  */

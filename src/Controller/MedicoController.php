@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Usuario;
+use App\Entity\Escritorio;
 use App\Entity\Medico;
 use App\Form\MedicoType;
 use App\Repository\EscritorioRepository;
@@ -10,16 +12,29 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 #[Route('/medico')]
 class MedicoController extends AbstractController
 {
+
+    public function __construct(Security $security)
+    {
+       $this->security = $security;
+    }
+
     #[Route('/', name: 'app_medico_index', methods: ['GET'])]
     public function index(MedicoRepository $medicoRepository, EscritorioRepository $escritorioRepository): Response
     {
+        $userLogged = new Usuario;
+        $escritorio = new Escritorio;
+        $medico = new Medico;
+        $userLogged = $this->security->getUser();
+        $escritorio = $userLogged->getOffice();
+        //$myCollectionIds = $escritorio->map(function($obj){return $obj->getId();})->getValues();
         return $this->render('medico/index.html.twig', [
-            'medicos' => $medicoRepository->findAll(),
-            'escritorios' => $escritorioRepository->findAll(),
+            //'medicos' => $medicoRepository->findAll(),
+            'medicos' => $medicoRepository->findByEscritorio($escritorio),
         ]);
     }
 

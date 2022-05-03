@@ -45,6 +45,16 @@ class AsoRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByEmpresa($empresa)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.empresa in (:empresa)')
+            ->setParameters(array('empresa' => $empresa))
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Aso[] Returns an array of Aso objects
     //  */

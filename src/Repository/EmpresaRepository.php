@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Empresa;
+use App\Entity\Escritorio;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -43,6 +44,18 @@ class EmpresaRepository extends ServiceEntityRepository
         if ($flush) {
             $this->_em->flush();
         }
+    }
+
+    public function findByEscritorio($escritorio)
+    {
+        return $this->createQueryBuilder('e')
+            ->join('App\Entity\Escritorio', 'escri')
+            ->andWhere('escri in (:escritorio)')
+            ->andWhere('escri.office_company = e')
+            ->setParameters(array('escritorio' => $escritorio))
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     // /**
