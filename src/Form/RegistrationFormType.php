@@ -14,6 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 use Symfony\Component\Security\Core\Security;
 
@@ -22,9 +23,10 @@ class RegistrationFormType extends AbstractType
 
     private $security;
 
-    public function __construct(Security $security)
+    public function __construct(Security $security, RequestStack $requestStack)
     {
        $this->security = $security;
+       $this->route = $requestStack->getCurrentRequest()->get('_route');
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -54,7 +56,27 @@ class RegistrationFormType extends AbstractType
                 }
             ])*/
 
-            ->add('cnpj', TextType::class, [
+
+        ;
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'onPreSetData']);
+        $builder->addEventListener(FormEvents::POST_SET_DATA, [$this, 'onPostSetData']);
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => Usuario::class,
+        ]);
+    }
+
+    public function onPreSetData(FormEvent $formEvent)
+    {
+        $form = $formEvent->getForm();
+        $user = $this->security->getUser();
+
+        if ($this->route == 'app_register')
+        {
+            $form->add('cnpj', TextType::class, [
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a CNPJ',
@@ -65,21 +87,12 @@ class RegistrationFormType extends AbstractType
                 'label' => 'CNPJ',
             ],
             
-            )
-            ->add('nome', null, array(
+        );
+            $form->add('nome', null, array(
                 'mapped' => false,
                 'label' => 'Nome da Empresa',
-            ))
-
-        ;
-        $builder->addEventListener(FormEvents::POST_SET_DATA, [$this, 'onPostSetData']);
-    }
-
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            'data_class' => Usuario::class,
-        ]);
+            ));
+        }
     }
 
     public function onPostSetData(FormEvent $formEvent)

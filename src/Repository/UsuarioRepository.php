@@ -62,6 +62,21 @@ class UsuarioRepository extends ServiceEntityRepository implements PasswordUpgra
         $this->_em->flush();
     }
 
+    /**
+     * @return Usuario[] Returns an array of Usuario objects
+     */
+    public function findByEscritorio($escritorio)
+    {
+
+        //SELECT distinct usuario_id FROM projetoTreino.usuario_escritorio JOIN projetoTreino.usuario WHERE escritorio_id = '?';
+        return $this->createQueryBuilder('u')
+            ->andWhere(':escritorio MEMBER OF u.office')
+            ->setParameters(array('escritorio' => $escritorio))
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Usuario[] Returns an array of Usuario objects
     //  */

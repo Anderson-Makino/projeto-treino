@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Escritorio;
 use App\Entity\Usuario;
 use App\Form\UsuarioType;
 use App\Repository\UsuarioRepository;
@@ -25,10 +26,12 @@ class UsuarioController extends AbstractController
     public function index(UsuarioRepository $usuarioRepository): Response
     {
         $userLogged = new Usuario;
+        $escritorio = new Escritorio;
         $userLogged = $this->security->getUser();
+        $escritorio = $userLogged->getOffice();
         return $this->render('usuario/index.html.twig', [
-            //'usuarios' => $usuarioRepository->findBy(array('office' => array($userLogged->getOffice()))),
-            'usuarios' => $usuarioRepository->findBy(array('id' => $userLogged->getId())),
+            //'usuarios' => $usuarioRepository->findAll(),
+            'usuarios' => $usuarioRepository->findByEscritorio($escritorio),
         ]);
     }
 
