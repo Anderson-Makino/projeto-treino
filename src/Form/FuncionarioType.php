@@ -50,12 +50,12 @@ class FuncionarioType extends AbstractType
                 'label' => 'Matrícula',
             ])
             ->add('categoria')
-            ->add('company_id',null,[
+            /*->add('company_id',null,[
                 'choice_label'=>function($company) {
                     return $company->getId().' - '. $company->getNome();
                 },
                 'label' => 'Empresa Associada',
-            ])
+            ])*/
         ;
     }
 

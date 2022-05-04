@@ -39,11 +39,18 @@ class EmpresaController extends AbstractController
     #[Route('/new', name: 'app_empresa_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EmpresaRepository $empresaRepository): Response
     {
+        $userLogged = new Usuario;
+        $escritorios = new Escritorio;
+        $escritorio = new Escritorio;
         $empresa = new Empresa();
+        $userLogged = $this->security->getUser();
+        $escritorios = $userLogged->getOffice();
         $form = $this->createForm(EmpresaType::class, $empresa);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            foreach($escritorios as $escritorio)
+            $empresa->setEscritorio($escritorio);
             $empresaRepository->add($empresa);
             return $this->redirectToRoute('app_empresa_index', [], Response::HTTP_SEE_OTHER);
         }

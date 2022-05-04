@@ -43,13 +43,13 @@ class MedicoType extends AbstractType
                 ],
                 'label' => 'UF',
             ])
-            ->add('escritorio',null,[
+            /*->add('escritorio',null,[
                 'choice_label'=>function($escritorio) {
                     return $escritorio->getId().' - '. $escritorio->getNome();
                 },
                 'label' => 'Escritorio Associado',
                 'expanded' => true,
-            ])
+            ])*/
         ;
     }
 

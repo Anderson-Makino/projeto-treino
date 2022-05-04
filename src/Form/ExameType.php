@@ -3,15 +3,30 @@
 namespace App\Form;
 
 use App\Entity\Exame;
+use App\Entity\Medico;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Repository\MedicoRepository;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class ExameType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options): void
+    /**
+     * @var $userSession TokenStorageInterface
+     */
+    private $userSession;
+
+    function __construct(MedicoRepository $medicoRepository, TokenStorageInterface $sessionToken) {
+
+        $this->medicosRepo = $medicoRepository;
+        $this->userSession = $sessionToken;
+
+    }
+
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('dtExm', DateType::class, [
@@ -43,8 +58,13 @@ class ExameType extends AbstractType
                 'format' => 'dd MM yyyy',
             ])
             ->add('medico', null,[
-                'choice_label' => function($medico) {
-                    return $medico->getId(). '-' . $medico->getNome();
+                'query_builder'=> function(MedicoRepository $repo) {
+                    return $repo->createQueryBuilder('m')
+                        ->andWhere('m.escritorio in (:escritorio)')
+                        ->setParameters(array('escritorio' => $this->userSession->getToken()->getUser()->getOffice()[0]));
+                },
+                'choice_label' => function(Medico $medico) {                    
+                    return $medico->getId(). '-' . $medico->getNome();                    
                 }
             ])
         ;

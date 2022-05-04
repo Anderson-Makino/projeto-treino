@@ -49,9 +49,7 @@ class EmpresaRepository extends ServiceEntityRepository
     public function findByEscritorio($escritorio)
     {
         return $this->createQueryBuilder('e')
-            ->join('App\Entity\Escritorio', 'escri')
-            ->andWhere('escri in (:escritorio)')
-            ->andWhere('escri.office_company = e')
+            ->andWhere('e.escritorio in (:escritorio)')
             ->setParameters(array('escritorio' => $escritorio))
             ->getQuery()
             ->getResult()

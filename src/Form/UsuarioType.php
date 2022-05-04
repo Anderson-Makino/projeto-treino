@@ -63,7 +63,7 @@ class UsuarioType extends AbstractType
             );
         }
 
-        if ($this->route != 'app_register')
+        /*if ($this->route != 'app_register')
         {
             $form->add('office', EntityType::class, [
                 'class' => Escritorio::class,
@@ -71,9 +71,9 @@ class UsuarioType extends AbstractType
                 'expanded' => true,
                 /*'choice_label'=>function($company) {
                     return $company->getId(). '-' .$company->getNome();
-                },*/
+                },
                 'choice_label' => 'nome',
             ]);
-        }
+        }*/
     }
 }

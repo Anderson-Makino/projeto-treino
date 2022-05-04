@@ -41,10 +41,17 @@ class MedicoController extends AbstractController
     #[Route('/new', name: 'app_medico_new', methods: ['GET', 'POST'])]
     public function new(Request $request, MedicoRepository $medicoRepository): Response
     {
+        $userLogged = new Usuario;
+        $escritorios = new Escritorio;
         $medico = new Medico();
+        $userLogged = $this->security->getUser();
+        $escritorios = $userLogged->getOffice();
         $form = $this->createForm(MedicoType::class, $medico);
         $form->handleRequest($request);
-
+        foreach ($escritorios as $escritorio) 
+        {
+            $medico->setEscritorio($escritorio);
+        }
         if ($form->isSubmitted() && $form->isValid()) {
             $medicoRepository->add($medico);
             return $this->redirectToRoute('app_medico_index', [], Response::HTTP_SEE_OTHER);

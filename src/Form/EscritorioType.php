@@ -67,12 +67,6 @@ class EscritorioType extends AbstractType
                 ],
                 'label' => 'UF',
             ])
-            ->add('office_company',null,[
-                'choice_label'=>function($company) {
-                    return $company->getId().' - '. $company->getNome();
-                },
-                'label' => 'Empresa Associada',
-            ])
             ;
     }
 
@@ -93,12 +87,6 @@ class EscritorioType extends AbstractType
             $form->add('endereco');
             $form->add('phone');
             $form->add('descricao');
-
-            $form->add('office_company',null,[
-                'choice_label'=>function($company) {
-                    return $company->getId().' - '. $company->getNome();
-                }
-            ]);
         }
     }
 }

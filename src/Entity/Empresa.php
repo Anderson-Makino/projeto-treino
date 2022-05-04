@@ -30,9 +30,6 @@ class Empresa
     #[ORM\Column(type: 'integer', nullable: true)]
     private $office;
 
-    #[ORM\OneToMany(mappedBy: 'office_company', targetEntity: Escritorio::class)]
-    private $company_office;
-
     #[ORM\OneToMany(mappedBy: 'company_id', targetEntity: Funcionario::class)]
     private $funcionario_id;
 
@@ -67,6 +64,9 @@ class Empresa
     private $asos;
 
     private $name = '';
+
+    #[ORM\ManyToOne(targetEntity: Escritorio::class, inversedBy: 'empresas')]
+    private $escritorio;
 
     public function __construct()
     {
@@ -137,36 +137,6 @@ class Empresa
     public function setOffice(int $office): self
     {
         $this->office = $office;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Escritorio>
-     */
-    public function getCompanyOffice(): Collection
-    {
-        return $this->company_office;
-    }
-
-    public function addCompanyOffice(Escritorio $companyOffice): self
-    {
-        if (!$this->company_office->contains($companyOffice)) {
-            $this->company_office[] = $companyOffice;
-            $companyOffice->setOfficeCompany($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCompanyOffice(Escritorio $companyOffice): self
-    {
-        if ($this->company_office->removeElement($companyOffice)) {
-            // set the owning side to null (unless already changed)
-            if ($companyOffice->getOfficeCompany() === $this) {
-                $companyOffice->setOfficeCompany(null);
-            }
-        }
 
         return $this;
     }
@@ -340,6 +310,18 @@ class Empresa
                 $asos->setEmpresa(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEscritorio(): ?Escritorio
+    {
+        return $this->escritorio;
+    }
+
+    public function setEscritorio(?Escritorio $escritorio): self
+    {
+        $this->escritorio = $escritorio;
 
         return $this;
     }

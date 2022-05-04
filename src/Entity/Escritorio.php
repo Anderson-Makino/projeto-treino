@@ -30,10 +30,6 @@ class Escritorio
     #[ORM\ManyToMany(targetEntity: Usuario::class, mappedBy: 'office', orphanRemoval: true)]
     private $user_office;
 
-    #[ORM\ManyToOne(targetEntity: Empresa::class, inversedBy: 'company_office')]
-    #[ORM\JoinColumn(nullable: true)]
-    private $office_company;
-
     private $name = '';
 
     #[ORM\Column(type: 'string', length: 14)]
@@ -66,10 +62,14 @@ class Escritorio
     #[ORM\OneToMany(mappedBy: 'escritorio', targetEntity: Medico::class)]
     private $medicos;
 
+    #[ORM\OneToMany(mappedBy: 'escritorio', targetEntity: Empresa::class)]
+    private $empresas;
+
     public function __construct()
     {
         $this->user_office = new ArrayCollection();
         $this->medicos = new ArrayCollection();
+        $this->empresas = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -148,18 +148,6 @@ class Escritorio
         if ($this->user_office->removeElement($userOffice)) {
             $userOffice->removeOffice($this);
         }
-
-        return $this;
-    }
-
-    public function getOfficeCompany(): ?Empresa
-    {
-        return $this->office_company;
-    }
-
-    public function setOfficeCompany(?Empresa $office_company): self
-    {
-        $this->office_company = $office_company;
 
         return $this;
     }
@@ -301,6 +289,36 @@ class Escritorio
             // set the owning side to null (unless already changed)
             if ($medico->getEscritorio() === $this) {
                 $medico->setEscritorio(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Empresa>
+     */
+    public function getEmpresas(): Collection
+    {
+        return $this->empresas;
+    }
+
+    public function addEmpresa(Empresa $empresa): self
+    {
+        if (!$this->empresas->contains($empresa)) {
+            $this->empresas[] = $empresa;
+            $empresa->setEscritorio($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEmpresa(Empresa $empresa): self
+    {
+        if ($this->empresas->removeElement($empresa)) {
+            // set the owning side to null (unless already changed)
+            if ($empresa->getEscritorio() === $this) {
+                $empresa->setEscritorio(null);
             }
         }
 
