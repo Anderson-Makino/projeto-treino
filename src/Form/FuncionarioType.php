@@ -3,13 +3,24 @@
 namespace App\Form;
 
 use App\Entity\Funcionario;
+use App\Repository\EmpresaRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class FuncionarioType extends AbstractType
 {
+    /**
+     * @var $userSession TokenStorageInterface
+     */
+    private $userSession;
+
+    function __construct(EmpresaRepository $empresaRepository, TokenStorageInterface $sessionToken) {
+        $this->empresaRepo = $empresaRepository;
+        $this->userSession = $sessionToken;
+    }
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -50,12 +61,18 @@ class FuncionarioType extends AbstractType
                 'label' => 'Matrícula',
             ])
             ->add('categoria')
-            /*->add('company_id',null,[
+            ->add('company_id',null,[
+                'query_builder'=>function(EmpresaRepository $repo) {
+                    return $repo->createQueryBuilder('e')
+                    ->andWhere('e.escritorio in (:escritorio)')
+                    ->setParameters(array('escritorio' => $this->userSession->getToken()->getUser()->getOffice()[0]));
+
+                },
                 'choice_label'=>function($company) {
                     return $company->getId().' - '. $company->getNome();
                 },
                 'label' => 'Empresa Associada',
-            ])*/
+            ])
         ;
     }
 

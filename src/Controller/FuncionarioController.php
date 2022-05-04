@@ -42,22 +42,22 @@ class FuncionarioController extends AbstractController
     #[Route('/new', name: 'app_funcionario_new', methods: ['GET', 'POST'])]
     public function new(Request $request, FuncionarioRepository $funcionarioRepository, EmpresaRepository $empresaRepository): Response
     {
-        $userLogged = new Usuario;
+        /*$userLogged = new Usuario;
         $escritorios = new Escritorio;
         $empresa = new Empresa;
-        $funcionario = new Funcionario();
         $userLogged = $this->security->getUser();
-        $escritorios = $userLogged->getOffice();
+        $escritorios = $userLogged->getOffice();*/
+        $funcionario = new Funcionario();
         $form = $this->createForm(FuncionarioType::class, $funcionario);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            foreach ($escritorios as $escritorio) 
+        /*    foreach ($escritorios as $escritorio) 
         {
             $empresa = $empresaRepository->findByEscritorio($escritorio);
             foreach ($empresa as $company)
             $funcionario->setCompanyId($company);
-        }
+        }*/
             $funcionarioRepository->add($funcionario);
             return $this->redirectToRoute('app_funcionario_index', [], Response::HTTP_SEE_OTHER);
         }
